@@ -1,5 +1,5 @@
 import {  Link, useNavigate } from "react-router-dom";
-import * as authService from "../../services/authService";
+import { login } from "../../services/authService";
 
 export const Login = () => {
     const navigate = useNavigate();
@@ -13,7 +13,7 @@ export const Login = () => {
         } = Object.fromEntries(new FormData(e.target));
 
 
-        authService.login(email, password)
+        login(email, password)
         .then(() => {
             navigate('/');
         })

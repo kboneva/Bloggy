@@ -10,8 +10,26 @@ import { Error } from "./components/pages/Error";
 import { Logout } from './components/users/Logout';
 
 import './App.css';
+import { useEffect, useState } from 'react';
+import { auth } from './firebase';
+
 
 function App() {
+    const [authenticated, setAuthenticated] = useState(!!auth.currentUser); // TODO possibly do this better? unused state var, only used to refresh the component
+
+    useEffect(() => {
+        auth.onAuthStateChanged(authUser => {
+            console.log("Auth user:", authUser);
+            if (authUser) {
+                setAuthenticated(true);
+            }
+            else {
+                setAuthenticated(false);
+            }
+        })
+    }, [])
+
+
     return (
         <div className='appSection'>
             <Header />

@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
-import * as authService from "../../services/authService";
+import { register } from "../../services/authService";
+import { addNewUser } from "../../services/userService";
 
 export const Register = () => {
     const navigate = useNavigate();
@@ -14,13 +15,12 @@ export const Register = () => {
             repeatPassword,
         } = Object.fromEntries(new FormData(e.target));
 
-        if (password != repeatPassword) {
+        if (password !== repeatPassword) {
             navigate('/404');
             return;
         }
 
-
-        authService.register(username, email, password)
+        Promise.all([register(username, email, password), addNewUser(username, email, password)])
             .then(() => {
                 navigate('/');
             })
