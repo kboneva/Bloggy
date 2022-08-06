@@ -4,11 +4,39 @@ input {
     border-radius: 5px;
 }
 
-.btn {
-    padding: 0.5rem;
+a {
+    color: black;
+    text-decoration: none;
 }
 
-.navLink {
+.btn {
+    padding: 0.75rem 2rem;
+}
+
+.navlink {
+    background-color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
     margin: 1rem;
     font-size: 20px;
+    
+ }
+
+ .navlink:hover {
+    background-color: rgb(230, 240, 243);
+ }
+
+ .logo {
+     font-size: 32px;
+ }
+
+.add-post {
+    background-color: var(--theme-color-blue);
+    color: white;
+    border: 1px solid var(--theme-color-blue);
+    border-radius: 50px;
+    font-size: 24px;
+    cursor: pointer;
 }

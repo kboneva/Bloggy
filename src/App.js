@@ -1,6 +1,7 @@
 
 import { Routes, Route } from 'react-router-dom';
 
+import { Spinner } from './components/common/Spinner';
 import { Header } from './components/common/Header';
 import { Footer } from './components/common/Footer';
 import { Home } from "./components/pages/Home";
@@ -13,6 +14,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import { auth } from './firebase';
 import { Profile } from './components/users/Profile';
+import { AddPost } from './components/posts/AddPost';
 
 
 function App() {
@@ -38,7 +40,7 @@ function App() {
         }), [])
 
     if (authentication.initializing) {
-        return <div>Loading...</div>;
+        return <Spinner />;
     }
     return (
         <div className='appSection'>
@@ -52,6 +54,7 @@ function App() {
                         <Route path="/register" element={<Register />} />
                         <Route path="/profile" element={<Profile />} />
                         <Route path="/logout" element={<Logout />} />
+                        <Route path="/add" element={<AddPost />} />
                         <Route path="*" element={<Error />} />
                     </Routes>
                 </div>

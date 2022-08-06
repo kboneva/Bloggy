@@ -1,3 +1,11 @@
+:root {
+    --theme-color-blue: rgb(15, 172, 219);
+    --theme-color-purple: rgb(188, 76, 202);
+    --theme-color-orange: rgb(230, 161, 13);
+    --theme-color-green: rgb(46, 148, 46);
+}
+
+
 .white-theme {
     background-color: white;
     color: black;

@@ -22,7 +22,6 @@ export const Test = () => {
             .then(res => {
                 setUsers(res);
                 setLoading(false);
-                console.log(users.map(user => user._id))
             })
     }, [])
 

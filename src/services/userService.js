@@ -6,7 +6,12 @@ const usersRef = ref(db, 'users');
 export const getAll = async () => {
     const snapshot = await get(child(usersRef));
     if (snapshot.exists()) {
-        return snapshot.val();
+        return Object.entries(snapshot.val()).map(([id, user]) => {
+            return {
+                _id: id,
+                ...user
+            }
+        })
     }
     else {
         console.log("No data available");

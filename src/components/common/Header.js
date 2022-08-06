@@ -7,20 +7,24 @@ export const Header = () => {
         <header>
             <div className='headerSection flex-wrapper'>
                 <div>
-                    <Link className='navLink' to={"/"}>Bloggy</Link>
+                    <Link className='logo navlink' to={"/"}>Bloggy</Link>
                 </div>
-                <div>
-                    {!!auth.currentUser // TODO replace Log out with Settings drop down, log out inside
-                        ? <div id='user'>
-                            <Link className='navLink' to={"/profile"}>{auth.currentUser.displayName}</Link>
-                            <Link className='navLink' to={"/logout"}>Log out</Link>
+                {!!auth.currentUser // TODO replace Log out with Settings drop down, log out inside
+                    ? <div id='user' className='flex-wrapper'>
+                        <Link className='navlink' to={"/profile"}>{auth.currentUser.displayName}</Link>
+                        {/* <Link className='navlink' to={"/logout"}>Log out</Link> */}
+                        <div className='dropdown'>
+                            <button className='btn navlink'>Settings</button>
+                            <div className='dropdown-content'>
+                                <Link to={'/logout'}>Log out</Link>
+                            </div>
                         </div>
-                        : <div id='guest'>
-                            <Link className='navLink' to={"/login"}>Login</Link>
-                            <Link className='navLink' to={"/register"}>Register</Link>
-                        </div>
-                    }
-                </div>
+                    </div>
+                    : <div id='guest' className='flex-wrapper'>
+                        <Link className='navlink' to={"/login"}>Login</Link>
+                        <Link className='navlink' to={"/register"}>Register</Link>
+                    </div>
+                }
             </div>
         </header>
     );
