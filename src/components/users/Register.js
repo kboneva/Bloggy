@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../../services/authService";
-import { addNewUser } from "../../services/userService";
 
 export const Register = () => {
     const navigate = useNavigate();
@@ -20,7 +19,7 @@ export const Register = () => {
             return;
         }
 
-        Promise.all([register(username, email, password), addNewUser(username, email, password)])
+        register(username, email, password)
             .then(() => {
                 navigate('/');
             })

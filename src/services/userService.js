@@ -1,4 +1,4 @@
-import { ref, child, get, push, set } from "firebase/database"
+import { ref, child, get, set } from "firebase/database"
 import { db } from "../firebase"
 
 const usersRef = ref(db, 'users');
@@ -23,11 +23,9 @@ export const getUserById = async (_id) => {
     }
 }
 
-export const addNewUser = async (username, email, password) => {
-    const newUserRef = push(usersRef);
+export const addNewUser = async (_id, username) => {
+    const newUserRef = ref(db, "users/" + _id);
     await set(newUserRef, {
-        username: username,
-        email: email,
-        password: password
+        username: username
     })
 }

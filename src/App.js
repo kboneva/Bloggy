@@ -12,24 +12,34 @@ import { Logout } from './components/users/Logout';
 import './App.css';
 import { useEffect, useState } from 'react';
 import { auth } from './firebase';
+import { Profile } from './components/users/Profile';
 
 
 function App() {
-    const [authenticated, setAuthenticated] = useState(!!auth.currentUser); // TODO possibly do this better? unused state var, only used to refresh the component
+    const [authentication, setAuthentication] = useState({
+        authenticated: false,
+        initializing: true
+    });
 
-    useEffect(() => {
+    useEffect(() =>
         auth.onAuthStateChanged(authUser => {
-            console.log("Auth user:", authUser);
             if (authUser) {
-                setAuthenticated(true);
+                setAuthentication({
+                    authenticated: true,
+                    initializing: false
+                });
             }
             else {
-                setAuthenticated(false);
+                setAuthentication({
+                    authenticated: false,
+                    initializing: false
+                });
             }
-        })
-    }, [])
+        }), [])
 
-
+    if (authentication.initializing) {
+        return <div>Loading...</div>;
+    }
     return (
         <div className='appSection'>
             <Header />
@@ -40,6 +50,7 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
+                        <Route path="/profile" element={<Profile />} />
                         <Route path="/logout" element={<Logout />} />
                         <Route path="*" element={<Error />} />
                     </Routes>

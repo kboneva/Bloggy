@@ -1,5 +1,7 @@
 export const Home = () => {
     return (
-        <p>Home</p>
+        <div>
+            Will display posts here
+        </div>
     );
 }

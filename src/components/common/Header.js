@@ -10,8 +10,9 @@ export const Header = () => {
                     <Link className='navLink' to={"/"}>Bloggy</Link>
                 </div>
                 <div>
-                    {!!auth.currentUser
+                    {!!auth.currentUser // TODO replace Log out with Settings drop down, log out inside
                         ? <div id='user'>
+                            <Link className='navLink' to={"/profile"}>{auth.currentUser.displayName}</Link>
                             <Link className='navLink' to={"/logout"}>Log out</Link>
                         </div>
                         : <div id='guest'>
