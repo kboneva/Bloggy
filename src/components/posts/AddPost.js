@@ -14,7 +14,7 @@ export const AddPost = () => {
                 navigate('/');
             })
             .catch(() => {
-                navigate('/404');
+                navigate('/not-found');
             })
 
     }

@@ -1,29 +1,57 @@
 import { useEffect, useState } from "react";
-import { auth } from "../../firebase";
+import { useNavigate, useParams } from "react-router-dom";
 import { getPosts } from "../../services/postService";
+import { getUserByName } from "../../services/userService";
 import { Post } from "../posts/Post";
+import { Spinner } from "../common/Spinner";
 
 export const Profile = () => {
-    const [posts, setPosts] = useState([]);
-    const user = auth.currentUser;
+    const { username } = useParams();
+    const [user, setUser] = useState({
+        current: null,
+        loaded: false
+    })
+    const [posts, setPosts] = useState({
+        list: [],
+        loaded: false
+    });
+    const navigate = useNavigate();
 
     useEffect(() => {
-        getPosts(user.uid)
-            .then(data => {
-                setPosts(data);
+        getUserByName(username)
+            .then(currentUser => {
+                if (!currentUser) {
+                    navigate('/not-found', { replace: true });
+                    return;
+                }
+                else {
+                    setUser({
+                        current: currentUser,
+                        loaded: true
+                    })
+                    getPosts(currentUser._id)
+                        .then(data => {
+                            setPosts({
+                                list: data,
+                                loaded: true
+                            });
+                        })
+                }
             })
     }, [])
 
+    if (!user.loaded) {
+        return <Spinner />;
+    }
     return (
-        <div>
-            <img src={user.photoURL} alt="avatar" />
-            <h1>{user.displayName}</h1>
-            <p>{user.email}</p>
+        !!user.current && <div>
+            <img src={user.current.avatar} alt="avatar" />
+            <h1>{user.current.username}</h1>
             <br />
             <div>
-                {posts.length > 0
+                {posts.loaded && posts.list.length > 0
                     ? <div >
-                        {posts.map(post =>
+                        {posts.list.map(post =>
                             <Post key={post._id} post={post} />
                         )}
                     </div>

@@ -1,5 +1,5 @@
 
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { Spinner } from './components/common/Spinner';
 import { Header } from './components/common/Header';
@@ -48,15 +48,23 @@ function App() {
 
             <main>
                 <div className='mainSection'>
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/profile" element={<Profile />} />
-                        <Route path="/logout" element={<Logout />} />
-                        <Route path="/add" element={<AddPost />} />
-                        <Route path="*" element={<Error />} />
-                    </Routes>
+                    {authentication.authenticated
+                        ? <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/:username" element={<Profile />} />
+                            <Route path="/profile" element={<Navigate to={`/${auth.currentUser.displayName}`} replace />} />
+                            <Route path="/logout" element={<Logout />} />
+                            <Route path="/add" element={<AddPost />} />
+                            <Route path="/not-found" element={<Error />} />
+                        </Routes>
+                        : <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/register" element={<Register />} />
+                            <Route path="/not-found" element={<Error />} />
+                            <Route path="/*" element={<Navigate to={"/not-found"} replace />} />
+                        </Routes>
+                    }
                 </div>
             </main>
 

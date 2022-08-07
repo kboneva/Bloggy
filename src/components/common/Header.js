@@ -9,10 +9,15 @@ export const Header = () => {
                 <div>
                     <Link className='logo navlink' to={"/"}>Bloggy</Link>
                 </div>
-                {!!auth.currentUser // TODO replace Log out with Settings drop down, log out inside
+                {!!auth.currentUser
                     ? <div id='user' className='flex-wrapper'>
+                        <div className="search-container">
+                            <input className='search-bar' type="text" id="search" name="search" placeholder="Search users" />
+                            <button className="btn" value="Search"><i className="fa fa-search"></i></button>
+                        </div>
+                        {/* // TODO leave this for later  */}
                         <Link className='navlink' to={"/profile"}>{auth.currentUser.displayName}</Link>
-                        {/* <Link className='navlink' to={"/logout"}>Log out</Link> */}
+                        
                         <div className='dropdown'>
                             <button className='btn navlink'>Settings</button>
                             <div className='dropdown-content'>
@@ -20,6 +25,7 @@ export const Header = () => {
                             </div>
                         </div>
                     </div>
+
                     : <div id='guest' className='flex-wrapper'>
                         <Link className='navlink' to={"/login"}>Login</Link>
                         <Link className='navlink' to={"/register"}>Register</Link>

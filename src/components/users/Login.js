@@ -18,7 +18,7 @@ export const Login = () => {
             navigate('/');
         })
         .catch(() => {
-            navigate('/404');
+            navigate('/not-found');
         });
     }
 

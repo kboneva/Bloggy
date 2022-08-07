@@ -15,7 +15,7 @@ export const Register = () => {
         } = Object.fromEntries(new FormData(e.target));
 
         if (password !== repeatPassword) {
-            navigate('/404');
+            navigate('/not-found');
             return;
         }
 
@@ -24,7 +24,7 @@ export const Register = () => {
                 navigate('/');
             })
             .catch(() => {
-                navigate('/404');
+                navigate('/not-found');
             })
     }
 
