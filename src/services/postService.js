@@ -1,4 +1,4 @@
-import { ref, push, set, orderByChild, equalTo, get, query } from "firebase/database"
+import { ref, push, set, orderByChild, equalTo, get, query, remove } from "firebase/database"
 import { auth, db } from "../firebase"
 
 const postsRef = ref(db, 'posts');
@@ -14,11 +14,11 @@ export const getAllPosts = async () => {
         })
     }
     else {
-        console.log("No data available");
+        return [];
     }
 }
 
-export const getPosts = async (_id) => {
+export const getPostsFrom = async (_id) => {
     const snapshot = await get(query(postsRef, orderByChild('userId'), equalTo(_id)))
     if (snapshot.exists()) {
         return Object.entries(snapshot.val()).map(([id, post]) => {
@@ -29,7 +29,7 @@ export const getPosts = async (_id) => {
         })
     }
     else {
-        console.log("No data available");
+        return [];
     }
 }
 
@@ -39,6 +39,10 @@ export const addNewPost = async (text) => {
         comments: [],
         likes: [],
         userId: auth.currentUser.uid,
-        text: text
+        text: text,
+        createdAt: Date.now().toString()
     })
 }
+
+export const deletePost = async (_id) =>
+    await remove(ref(db, "posts/" + _id))

@@ -1,13 +1,18 @@
-import { auth } from "../../firebase";
-import { useNavigate } from "react-router-dom";
-import { Post } from "../posts/Post";
 import { useEffect, useState } from "react";
-import { getAllPosts } from "../../services/postService";
+import { useNavigate } from "react-router-dom";
+import { PostContext } from "../../contexts/PostContext";
+import { auth } from "../../firebase";
+import { deletePost, getAllPosts } from "../../services/postService";
+import { PostsList } from "../posts/PostsList";
 
 export const Home = () => {
     const [posts, setPosts] = useState([]);
     const user = auth.currentUser;
     const navigate = useNavigate();
+
+    const AddPostNavigate = () => {
+        navigate('/add');
+    }
 
     useEffect(() => {
         getAllPosts()
@@ -16,22 +21,19 @@ export const Home = () => {
             })
     }, [])
 
-
-    const AddPostNavigate = () => {
-        navigate('/add');
+    const deleteHandler = (_id) => {
+        deletePost(_id)
+        .then(() => {
+            setPosts(state => state.filter(x => x._id != _id));
+        });
     }
 
     return (
         <div>
-            {posts.length > 0
-                ? <div >
-                    {posts.map(post =>
-                        <Post key={post._id} post={post} />
-                    )}
-                </div>
-                : ""
-            }
-            {!!user ? <button className="btn add-post" onClick={AddPostNavigate}>Post</button> : ""}
+            <PostContext.Provider value={{deleteHandler}}>
+                <PostsList posts={posts} />
+            </PostContext.Provider>
+            {!!user ? <button className="big-btn theme-btn" onClick={AddPostNavigate}>Post</button> : ""}
         </div>
     );
 }

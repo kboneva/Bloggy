@@ -27,7 +27,7 @@ export const AddPost = () => {
                 </div>
 
                 <div>
-                    <input type="submit" className="btn add-post" value="Post" />
+                    <input type="submit" className="big-btn theme-btn" value="Post" />
                 </div>
             </div>
         </form>

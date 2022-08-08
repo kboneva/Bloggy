@@ -39,7 +39,7 @@ export const Login = () => {
                     </div>
 
                     <div>
-                        <input type="submit" className="btn submit" value="Login"/>
+                        <input type="submit" className="big-btn submit" value="Login"/>
                     </div>
 
                     <div>

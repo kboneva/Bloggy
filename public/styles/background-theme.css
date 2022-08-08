@@ -1,8 +1,19 @@
 :root {
-    --theme-color-blue: rgb(15, 172, 219);
-    --theme-color-purple: rgb(188, 76, 202);
-    --theme-color-orange: rgb(230, 161, 13);
-    --theme-color-green: rgb(46, 148, 46);
+    --main-color-blue: rgb(15, 172, 219);
+    --hover-color-blue: rgb(28, 135, 197);
+    --hover-white-blue: rgb(200, 225, 233);
+
+
+    --main-color-purple: rgb(188, 76, 202);
+
+
+    --main-color-orange: rgb(230, 161, 13);
+
+
+    --main-color-green: rgb(46, 148, 46);
+
+
+    --hover-white-red: rgb(233, 197, 197);
 }
 
 

@@ -55,7 +55,7 @@ export const Register = () => {
                 </div>
 
                 <div>
-                    <input type="submit" className="btn submit" value="Register" />
+                    <input type="submit" className="big-btn submit" value="Register" />
                 </div>
 
                 <div>

@@ -9,8 +9,18 @@ a {
     text-decoration: none;
 }
 
-.btn {
-    padding: 0.75rem 2rem;
+.avatar-s {
+    width: 50px;
+    height: 50px;
+    border: 1px solid rgb(160, 160, 160);
+    border-radius: 50%;
+}
+
+.avatar-l {
+    width: 150px;
+    height: 150px;
+    border: 1px solid rgb(160, 160, 160);
+    border-radius: 50%;
 }
 
 .navlink {
@@ -19,9 +29,7 @@ a {
     font-size: 16px;
     border: none;
     cursor: pointer;
-    margin: 1rem;
     font-size: 20px;
-    
  }
 
  .navlink:hover {
@@ -29,14 +37,23 @@ a {
  }
 
  .logo {
-     font-size: 32px;
+     font-size: 28px;
  }
 
-.add-post {
-    background-color: var(--theme-color-blue);
-    color: white;
-    border: 1px solid var(--theme-color-blue);
-    border-radius: 50px;
-    font-size: 24px;
-    cursor: pointer;
+.post {
+    padding: 1rem;
+    border: 1px solid lightgray;
+}
+
+.username {
+    font-size: 20px;
+}
+
+.post-text {
+    margin: 0.5rem 0;
+}
+
+.profile-box {
+    padding: 1rem;
+    border: 1px solid lightgray;
 }
