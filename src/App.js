@@ -1,24 +1,23 @@
-
+import { useEffect, useState } from 'react';
+import { auth } from './firebase';
+import { ThemeContext } from './contexts/ThemeContext';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { Spinner } from './components/common/Spinner';
 import { Header } from './components/common/Header';
 import { Footer } from './components/common/Footer';
 import { Catalog } from "./components/pages/Catalog";
-import { Login } from "./components/users/Login";
 import { Register } from "./components/users/Register";
-import { Error } from "./components/pages/Error";
+import { Login } from "./components/users/Login";
 import { Logout } from './components/users/Logout';
-
-import './App.css';
-import { useEffect, useState } from 'react';
-import { auth } from './firebase';
+import { Error } from "./components/pages/Error";
 import { Profile } from './components/users/Profile';
 import { Settings } from './components/users/Settings';
-import { ThemeContext } from './contexts/ThemeContext';
 import { Welcome } from './components/pages/Welcome';
+import { Details } from './components/posts/Details';
 import { isDarkTheme, updateThemePreference } from './services/userService';
 
+import './App.css';
 
 function App() {
     const [authentication, setAuthentication] = useState({
@@ -71,6 +70,7 @@ function App() {
                             <Route path="/" element={<Catalog />} />
                             <Route path="/:username" element={<Profile />} />
                             <Route path="/profile" element={<Navigate to={`/${auth.currentUser.displayName}`} replace />} />
+                            <Route path='/post/:postId' element={<Details />} />
                             <Route path='/settings' element={<Settings />}/>
                             <Route path="/logout" element={<Logout />} />
                             <Route path="/not-found" element={<Error />} />

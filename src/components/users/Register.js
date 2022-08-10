@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../../services/authService";
+import styles from './Register.module.css';
 
 export const Register = () => {
     const navigate = useNavigate();
@@ -34,32 +35,32 @@ export const Register = () => {
             <div className="container">
                 <h1>Register</h1>
 
-                <div className="usernameSection">
-                    <label htmlFor="username">Username</label>
-                    <input type="text" id="username" name="username" placeholder="John" />
+                <div className={styles.area}>
+                    <label className={styles.label} htmlFor="username">Username</label>
+                    <input className={styles.input} type="text" id="username" name="username" placeholder="John" />
                 </div>
 
-                <div className="emailSection">
-                    <label htmlFor="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="john@email.com" />
+                <div className={styles.area}>
+                    <label className={styles.label} htmlFor="email">Email</label>
+                    <input className={styles.input} type="email" id="email" name="email" placeholder="john@email.com" />
                 </div>
 
-                <div className="passwordSection">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="*********" />
+                <div className={styles.area}>
+                    <label className={styles.label} htmlFor="password">Password</label>
+                    <input className={styles.input} type="password" id="password" name="password" placeholder="*********" />
                 </div>
 
-                <div className="repeatPasswordSection">
-                    <label htmlFor="password">Repeat Password</label>
-                    <input type="password" id="repeatPassword" name="repeatPassword" placeholder="*********" />
-                </div>
-
-                <div>
-                    <input type="submit" className="big-btn submit" value="Register" />
+                <div className={styles.area}>
+                    <label className={styles.label} htmlFor="password">Repeat Password</label>
+                    <input className={styles.input} type="password" id="repeatPassword" name="repeatPassword" placeholder="*********" />
                 </div>
 
                 <div>
-                    <p>Already have a profile? <span><Link to='/login'>Click here.</Link></span></p>
+                    <input type="submit" className={styles.btn} value="Register" />
+                </div>
+
+                <div>
+                    <p>Already have a profile? <span><Link className={styles.span} to='/login'>Click here.</Link></span></p>
                 </div>
             </div>
         </form>

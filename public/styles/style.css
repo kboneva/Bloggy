@@ -1,8 +1,5 @@
 @import url(theme.css);
-@import url(utils.css);
-@import url(dropdown.css);
-@import url(search.css);
-@import url(buttons.css);
+@import url(common.css);
 @import url(spinner.css);
 @import url(https://use.fontawesome.com/releases/v5.10.2/css/all.css);
 
@@ -38,29 +35,4 @@ footer .upper-row {
     margin-left: auto;
     margin-right: auto;
     padding: 5rem;
-}
-
-.container {
-    width: 500px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 3rem;
-    box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.5);
-}
-
-.flex-wrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.flex-left {
-    justify-content: flex-start;
-}
-
-.flex-align {
-    align-items: flex-start;
 }

@@ -4,7 +4,8 @@ import { PostContext } from "../../contexts/PostContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { auth } from "../../firebase";
 import { getUserById } from "../../services/userService";
-import { Spinner } from "../common/Spinner";
+import { Like } from "./Like";
+import styles from './Post.module.css'
 
 export const Post = ({ post }) => {
     const [user, setUser] = useState(null);
@@ -17,21 +18,29 @@ export const Post = ({ post }) => {
             .then(user => {
                 setUser(user);
             })
-    })
+    }, [])
 
     if (!user) {
         return '';
     }
     return (
-        <div className="border-box flex-wrapper">
-            <div className="flex-wrapper flex-left flex-align">
-                <img src={user.avatar} className="avatar-s" alt="" />
-                <div>
-                    <Link to={`/${user.username}`}><span className="username">{user.username}</span></Link>
-                    <div className="post-text">{post.text}</div>
+        <div className="border">
+            <Link to={`/post/${post._id}`}>
+                <div className="flex">
+                    <div className="flexStart">
+                        <object><Link to={`/${user.username}`}><img src={user.avatar} className={styles.avatar} alt="" /></Link></object>
+                        <div>
+                            <object><Link to={`/${user.username}`}><span className={styles.username}>{user.username}</span></Link></object>
+                            <div className={styles.text}>{post.text}</div>
+                        </div>
+                    </div>
                 </div>
+            </Link>
+            <hr />
+            <div className="flex">
+                <Like postId={post._id} />
+                {currentId === post.userId && <button className={`${styles.btn} ${darkTheme ? "dark" : "white"}-danger`} onClick={() => deleteHandler(post._id)}><i className={`${styles.icon} fas fa-times`}></i></button>}
             </div>
-            {currentId === post.userId && <button className={`circle-btn ${darkTheme ? "dark" : "white"}-danger`} onClick={() => deleteHandler(post._id)}><i className="fas fa-times"></i></button>} 
         </div>
     );
 }

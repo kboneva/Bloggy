@@ -1,37 +1,28 @@
 import { Link } from 'react-router-dom'
 import { auth } from '../../firebase';
+import { Search } from './Search';
+import { Dropdown } from './Dropdown';
+import styles from './Header.module.css'
 
 export const Header = () => {
 
     return (
         <header>
-            <div className='headerSection flex-wrapper'>
+            <div className="headerSection flex">
                 <div>
-                    <Link className='logo navlink' to={"/"}>Bloggy</Link>
+                    <Link className={styles.logo} to={"/"}>Bloggy</Link>
                 </div>
                 {!!auth.currentUser
-                    ? <div id='user' className='flex-wrapper'>
-
-                        <div className="search-container">
-                            <input className='search-bar' type="text" id="search" name="search" placeholder="Search users" />
-                            <button value="Search"><i className="fa fa-search"></i></button>
-                        </div>
+                    ? <div id='user' className="flex">
+                        <Search />
                         {/* // TODO leave this for later  */}
 
-
-
-                        <div className='dropdown'>
-                            <Link className='navlink' to={"/profile"}>{auth.currentUser.displayName}</Link>
-                            <div className='dropdown-content'>
-                                <Link to={'/settings'}>Edit profile</Link>
-                                <Link to={'/logout'}>Log out</Link>
-                            </div>
-                        </div>
+                        <Dropdown />
                     </div>
 
-                    : <div id='guest' className='flex-wrapper'>
-                        <Link className='navlink' to={"/login"}>Login</Link>
-                        <Link className='navlink' to={"/register"}>Register</Link>
+                    : <div id='guest' className="flex">
+                        <Link className={styles.navlink} to={"/login"}>Login</Link>
+                        <Link className={styles.navlink}to={"/register"}>Register</Link>
                     </div>
                 }
             </div>

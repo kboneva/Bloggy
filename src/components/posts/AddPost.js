@@ -1,21 +1,17 @@
 import { useContext } from "react";
 import { PostContext } from "../../contexts/PostContext";
+import styles from './AddPost.module.css'
 
 export const AddPost = () => {
     const { addPostHandler, addPostToggle } = useContext(PostContext);
 
     return (
         <form id="post" onSubmit={addPostHandler}>
-            <div className="border-box">
-                <div className="text">
-                    <input type="text" id="text" name="text" placeholder="What's on your mind?" />
-                </div>
+            <div className="border">
+                <textarea id="text" className={styles.text} name="text" rows={4} cols={60} placeholder="What's on your mind?" ></textarea>
 
-                <div>
-                    <input type="submit" className="post-btn big-btn primary-color-blue" value="Post" />
-                    <button type="button" onClick={() => addPostToggle()} className="post-btn big-btn">Cancel</button>
-                </div>
-
+                <input type="submit" className={`${styles.post} primary-color-blue`} value="Post" />
+                <button type="button" onClick={() => addPostToggle()} className={styles.cancel}>Cancel</button>
             </div>
         </form>
     );

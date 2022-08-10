@@ -4,6 +4,7 @@ import { PostContext } from "../../contexts/PostContext";
 import { addNewPost, deletePost } from "../../services/postService";
 import { Post } from "./Post";
 import { AddPost } from "./AddPost";
+import styles from './PostsList.module.css'
 
 export const PostsList = ({ posts, setPosts, isMe }) => {
     const [addPostDiv, setAddPostDiv] = useState(false);
@@ -42,6 +43,8 @@ export const PostsList = ({ posts, setPosts, isMe }) => {
     return (
         <PostContext.Provider value={{ deleteHandler, addPostHandler, addPostToggle }}>
             <div>
+                {addPostDiv && <AddPost />}
+                {isMe && !addPostDiv ? <button className={`${styles.post} primary-color-blue`}  onClick={() => addPostToggle()}>Post</button> : ""}
                 {posts.length > 0
                     ? <div >
                         {posts.sort((a, b) => b.createdAt - a.createdAt).map(post =>
@@ -50,8 +53,6 @@ export const PostsList = ({ posts, setPosts, isMe }) => {
                     </div>
                     : ""
                 }
-                {addPostDiv && <AddPost/>}
-                {isMe && !addPostDiv ? <button className="post-btn big-btn primary-color-blue" onClick={() => addPostToggle()}>Post</button> : ""}
             </div>
         </PostContext.Provider>
 

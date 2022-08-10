@@ -1,0 +1,21 @@
+.logo {
+    font-size: 28px;
+    padding: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.navlink {
+    padding: 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+ }
+
+ .flex {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+}

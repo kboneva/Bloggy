@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 export const Footer = () => {
     return (
         <footer>
-            <div className="flex-wrapper upper-row">
+            <div className="flex upper-row">
                 <h4>Contacts</h4>
-                <div className="flex-wrapper">
+                <div className="flex">
                 <Link to=""><i className="fab fa-twitter"></i></Link>
                 <Link to=""><i className="fab fa-facebook"></i></Link>
                 <Link to=""><i className="fab fa-instagram"></i></Link>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { auth } from "../../firebase";
 import {  getAllPosts } from "../../services/postService";
 import { PostsList } from "../posts/PostsList";
+import styles from './Catalog.module.css'
 
 export const Catalog = () => {
     const [posts, setPosts] = useState([]);
@@ -16,7 +17,7 @@ export const Catalog = () => {
 
     return (
         <div>
-            <h1 className="title">Home</h1>
+            <h1 className={styles.title}>Home</h1>
             <PostsList posts={posts} setPosts={setPosts} isMe={true}/>
         </div>
     );

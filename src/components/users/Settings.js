@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { auth } from "../../firebase";
+import styles from './Settings.module.css';
 
 export const Settings = () => {
     const user = auth.currentUser;
@@ -8,25 +9,22 @@ export const Settings = () => {
 
     return (
         <div>
-            <div className="flex-wrapper border-box">
-                <p className="username">Username: {user.displayName}</p>
-                <button className={`big-btn ${darkTheme ? "dark" : "white"}-color-blue`}>Change</button>
+            <div className="flex border">
+                <p className={styles.text}>Username: {user.displayName}</p>
+                <button className={`${styles.btn} ${darkTheme ? "dark" : "white"}-color-blue`}>Change</button>
             </div>
-            {/* <div className="flex-wrapper">
-                <img src={user.photoURL} className="avatar-s" alt="avatar" />
-                <button>Change</button>
-            </div> */}
-            <div className="flex-wrapper border-box">
-                <p className="username">Email: {user.email}</p>
-                <button className={`big-btn ${darkTheme ? "dark" : "white"}-color-blue`}>Change</button>
+            {/* avatar */}
+            <div className="flex border">
+                <p className={styles.text}>Email: {user.email}</p>
+                <button className={`${styles.btn} ${darkTheme ? "dark" : "white"}-color-blue`}>Change</button>
             </div>
-            <div className="flex-wrapper border-box">
-                <p className="username">Verified: {user.emailVerified ? "Yes" : "No"}</p>
-                <button className={`big-btn ${darkTheme ? "dark" : "white"}-color-blue`}>Change</button>
+            <div className="flex border">
+                <p className={styles.text}>Verified: {user.emailVerified ? "Yes" : "No"}</p>
+                <button className={`${styles.btn} ${darkTheme ? "dark" : "white"}-color-blue`}>Change</button>
             </div>
-            <div className="flex-wrapper border-box">
-                <p className="username">{darkTheme ? "Dark" : "Light"} Theme</p>
-                <button className="invisible-btn" onClick={() => darkThemeToggle(user.uid)}>{darkTheme ? <i className="icon-color fas fa-toggle-on"></i> : <i className="icon-color fas fa-toggle-off"></i>}</button>
+            <div className="flex border">
+                <p className={styles.text}>{darkTheme ? "Dark" : "Light"} Theme</p>
+                <button className={styles.invisible} onClick={() => darkThemeToggle(user.uid)}>{darkTheme ? <i className={`${styles.icon} icon-color fas fa-toggle-on`}></i> : <i className={`${styles.icon} icon-color fas fa-toggle-off`}></i>}</button>
             </div>
         </div>
     );

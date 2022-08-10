@@ -1,11 +1,12 @@
-input {
-    padding: 6px;
+.searchBar {
     margin-top: 8px;
     font-size: 17px;
     border: none;
+    padding: 0.3rem 0.5rem;
+    border-radius: 5px;
   }
 
-.search-container button {
+.searchBtn {
     float: right;
     padding: 6px 10px;
     margin-top: 8px;
@@ -15,7 +16,7 @@ input {
     cursor: pointer;
   }
 
-.search-result {
+.searchResult {
     display: none;
     position: absolute;
     min-width: 160px;

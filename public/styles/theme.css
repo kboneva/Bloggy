@@ -1,7 +1,7 @@
 :root {
     --light: rgb(245, 245, 245);
     --light-darker: rgb(225, 225, 230);
-    --light-darkest: rgb(208, 208, 215);
+    --light-darkest: rgb(205, 205, 215);
     --dark: rgb(35, 45, 55);
     --dark-darker: rgb(25, 35, 45);
     --dark-lighter: rgb(50, 65, 80);
@@ -12,17 +12,18 @@
     --hover-dark-blue: rgb(45, 100, 135);
 
 
-    --main-color-purple: rgb(188, 76, 202);
+    --main-color-purple: rgb(190, 75, 200);
+
+    --main-color-orange: rgb(230, 160, 15);
+    --hover-color-orange: rgb(200, 115, 10);
+    --hover-white-orange: rgb(235, 225, 200);
+    --hover-dark-orange: rgb(135, 75, 45);
+
+    --main-color-green: rgb(45, 150, 50);
 
 
-    --main-color-orange: rgb(230, 161, 13);
-
-
-    --main-color-green: rgb(46, 148, 46);
-
-
-    --hover-white-red: rgb(233, 197, 197);
-    --hover-dark-red: rgb(119, 58, 66);
+    --hover-white-red: rgb(235, 200, 200);
+    --hover-dark-red: rgb(120, 60, 65);
 
     --transition: 0.2s;
 }
@@ -31,31 +32,35 @@
     transition: all var(--transition);
 }
 
-.light-theme, .light-theme a, .light-theme .invisible-btn {
+.light-theme, .light-theme a {
     background-color: var(--light);
     color: var(--dark);
 }
 
-.light-theme input {
+.light-theme input, .light-theme textarea {
     background-color: white;
-    border: 1px solid var(--light-darkest);
+    border: 1px solid var(--light-darker);
 }
 
-.light-theme .dropdown-content a:hover {
+.light-theme .dropdown-theme:hover {
     background-color: var(--light-darker);
 }
 
-.light-theme .border-box {
+.light-theme .border {
     border: 2px solid var(--light-darkest);
 }
 
+.light-theme hr {
+    color: var(--light-darker)
+}
 
-.dark-theme, .dark-theme a, .dark-theme .invisible-btn {
+
+.dark-theme, .dark-theme a {
     background-color: var(--dark);
     color: var(--light);
 }
 
-.dark-theme input {
+.dark-theme input, .dark-theme textarea {
     background-color: var(--dark-lighter);
     color: var(--light);
     border: 1px solid var(--dark-lighter);
@@ -66,24 +71,27 @@
     color: var(--light-darker);
 }
 
-.dark-theme .search-container button {
+.dark-theme .search {
     background-color: var(--dark-darker);
     color: var(--light-darker);
 }
 
-.dark-theme .search-container button:hover {
+.dark-theme .search:hover {
     background-color: var(--hover-dark-blue);
     color: var(--light);
 }
 
-.dark-theme .dropdown-content a:hover {
+.dark-theme .dropdown-theme:hover {
     background-color: var(--dark-darker);
 }
 
-.dark-theme .border-box {
+.dark-theme .border {
     border: 2px solid var(--dark-lighter);
 }
 
+.dark-theme hr {
+    color: var(--dark-lighter)
+}
 
 
 .primary-color-blue {

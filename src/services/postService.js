@@ -1,4 +1,4 @@
-import { ref, push, set, orderByChild, equalTo, get, query, remove } from "firebase/database"
+import { ref, push, set, orderByChild, equalTo, get, query, remove, child } from "firebase/database"
 import { auth, db } from "../firebase"
 
 const postsRef = ref(db, 'posts');
@@ -30,6 +30,16 @@ export const getPostsFrom = async (_id) => {
     }
     else {
         return [];
+    }
+}
+
+export const getPostById = async (_id) => {
+    const snapshot = await get(child(postsRef, _id));
+    if (snapshot.exists()) {
+        return snapshot.val()
+    }
+    else {
+        return null;
     }
 }
 

@@ -7,6 +7,7 @@ import { getPostsFrom } from "../../services/postService";
 import { getUserByName } from "../../services/userService";
 import { Spinner } from "../common/Spinner";
 import { PostsList } from "../posts/PostsList";
+import styles from './Profile.module.css';
 
 export const Profile = () => {
     const { username } = useParams();
@@ -64,14 +65,14 @@ export const Profile = () => {
     }
     return (
         !!user.current && <div>
-            <div className="flex-wrapper flex-left flex-align border-box">
-                <img src={user.current.avatar} className="avatar-l" alt="avatar" />
+            <div className="flexStart border">
+                <img src={user.current.avatar} className={styles.avatar} alt="avatar" />
                 <div>
                     <h1>{user.current.username}</h1> {/* TODO write followers*/}
                     {user.current._id !== currentId && <div>
                         {!following
-                            ? <button className={`med-btn ${darkTheme ? "dark" : "white"}-color-blue`} onClick={followHandler}>Follow</button>
-                            : <button className={`med-btn ${darkTheme ? "dark" : "white"}-danger`} onClick={unFollowHandler}>Unfollow</button>
+                            ? <button className={`${styles.btn} ${darkTheme ? "dark" : "white"}-color-blue`} onClick={followHandler}>Follow</button>
+                            : <button className={`${styles.btn} ${darkTheme ? "dark" : "white"}-danger`} onClick={unFollowHandler}>Unfollow</button>
                         }
                     </div>
                     }

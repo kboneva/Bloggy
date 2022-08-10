@@ -1,5 +1,6 @@
 import {  Link, useNavigate } from "react-router-dom";
 import { login } from "../../services/authService";
+import styles from './Login.module.css';
 
 export const Login = () => {
     const navigate = useNavigate();
@@ -28,22 +29,22 @@ export const Login = () => {
                 <div className="container">
                     <h1>Login</h1>
 
-                    <div className="emailSection">
-                        <label htmlFor="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="john@email.com" />
+                    <div className={styles.area}>
+                        <label className={styles.label} htmlFor="email">Email</label>
+                        <input className={styles.input} type="email" id="email" name="email" placeholder="john@email.com" />
                     </div>
 
-                    <div className="passwordSection">
-                        <label htmlFor="password">Password</label>
-                        <input type="password" id="password" name="password" placeholder="*********" />
-                    </div>
-
-                    <div>
-                        <input type="submit" className="big-btn submit" value="Login"/>
+                    <div className={styles.area}>
+                        <label className={styles.label} htmlFor="password">Password</label>
+                        <input className={styles.input} type="password" id="password" name="password" placeholder="*********" />
                     </div>
 
                     <div>
-                        <p>Don't have an account? <span><Link to='/register'>Click here.</Link></span></p>
+                        <input type="submit" className={styles.btn} value="Login"/>
+                    </div>
+
+                    <div>
+                        <p>Don't have an account? <span><Link className={styles.span} to='/register'>Click here.</Link></span></p>
                     </div>
                 </div>
             </form>
