@@ -35,13 +35,20 @@ export const getPostsFrom = async (_id) => {
 
 export const addNewPost = async (text) => {
     const newPostRef = await push(postsRef, text)
+    const date = Date.now().toString();
     await set(newPostRef, {
         comments: [],
         likes: [],
         userId: auth.currentUser.uid,
         text: text,
-        createdAt: Date.now().toString()
+        createdAt: date
     })
+    return {
+        _id: newPostRef.key,
+        userId: auth.currentUser.uid,
+        text: text,
+        createdAt: date
+    }
 }
 
 export const deletePost = async (_id) =>

@@ -19,7 +19,7 @@ export const getFollowers = async (id) => {
 export const isFollowing = async (currentId, id) => {
     const snapshot = await get(ref(db, `follow/from/${currentId}/${id}`));
     if (snapshot.exists()) {
-        return snapshot.val();
+        return true;
     }
     else return false;
 }

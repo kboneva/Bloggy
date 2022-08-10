@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { PostContext } from "../../contexts/PostContext";
+import { ThemeContext } from "../../contexts/ThemeContext";
 import { auth } from "../../firebase";
 import { getUserById } from "../../services/userService";
 import { Spinner } from "../common/Spinner";
@@ -8,7 +9,7 @@ import { Spinner } from "../common/Spinner";
 export const Post = ({ post }) => {
     const [user, setUser] = useState(null);
     const currentId = auth.currentUser.uid;
-
+    const { darkTheme } = useContext(ThemeContext);
     const { deleteHandler } = useContext(PostContext);
 
     useEffect(() => {
@@ -18,11 +19,11 @@ export const Post = ({ post }) => {
             })
     })
 
-    
-
-    if (!user) return <Spinner />;
+    if (!user) {
+        return '';
+    }
     return (
-        <div className="post flex-wrapper flex-align">
+        <div className="border-box flex-wrapper">
             <div className="flex-wrapper flex-left flex-align">
                 <img src={user.avatar} className="avatar-s" alt="" />
                 <div>
@@ -30,7 +31,7 @@ export const Post = ({ post }) => {
                     <div className="post-text">{post.text}</div>
                 </div>
             </div>
-            {currentId === post.userId && <button className="circle-btn white-btn white-danger-btn" onClick={() => deleteHandler(post._id)}>X</button>} 
+            {currentId === post.userId && <button className={`circle-btn ${darkTheme ? "dark" : "white"}-danger`} onClick={() => deleteHandler(post._id)}><i className="fas fa-times"></i></button>} 
         </div>
     );
 }

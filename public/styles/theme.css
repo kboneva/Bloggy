@@ -1,0 +1,119 @@
+:root {
+    --light: rgb(245, 245, 245);
+    --light-darker: rgb(225, 225, 230);
+    --light-darkest: rgb(208, 208, 215);
+    --dark: rgb(35, 45, 55);
+    --dark-darker: rgb(25, 35, 45);
+    --dark-lighter: rgb(50, 65, 80);
+
+    --main-color-blue: rgb(15, 175, 220);
+    --hover-color-blue: rgb(30, 135, 200);
+    --hover-white-blue: rgb(200, 225, 235);
+    --hover-dark-blue: rgb(45, 100, 135);
+
+
+    --main-color-purple: rgb(188, 76, 202);
+
+
+    --main-color-orange: rgb(230, 161, 13);
+
+
+    --main-color-green: rgb(46, 148, 46);
+
+
+    --hover-white-red: rgb(233, 197, 197);
+    --hover-dark-red: rgb(119, 58, 66);
+
+    --transition: 0.2s;
+}
+
+* {
+    transition: all var(--transition);
+}
+
+.light-theme, .light-theme a, .light-theme .invisible-btn {
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+.light-theme input {
+    background-color: white;
+    border: 1px solid var(--light-darkest);
+}
+
+.light-theme .dropdown-content a:hover {
+    background-color: var(--light-darker);
+}
+
+.light-theme .border-box {
+    border: 2px solid var(--light-darkest);
+}
+
+
+.dark-theme, .dark-theme a, .dark-theme .invisible-btn {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+.dark-theme input {
+    background-color: var(--dark-lighter);
+    color: var(--light);
+    border: 1px solid var(--dark-lighter);
+}
+
+.dark-theme button {
+    background-color: var(--dark-lighter);
+    color: var(--light-darker);
+}
+
+.dark-theme .search-container button {
+    background-color: var(--dark-darker);
+    color: var(--light-darker);
+}
+
+.dark-theme .search-container button:hover {
+    background-color: var(--hover-dark-blue);
+    color: var(--light);
+}
+
+.dark-theme .dropdown-content a:hover {
+    background-color: var(--dark-darker);
+}
+
+.dark-theme .border-box {
+    border: 2px solid var(--dark-lighter);
+}
+
+
+
+.primary-color-blue {
+    background-color: var(--main-color-blue) !important;
+    color: var(--light);
+}
+
+.primary-color-blue:hover {
+    background-color: var(--hover-color-blue) !important;
+}
+
+.white-color-blue:hover {
+    background-color: var(--hover-white-blue);
+}
+
+.dark-color-blue:hover {
+    background-color: var(--hover-dark-blue);
+}
+
+
+
+.white-danger:hover {
+    background-color: var(--hover-white-red);
+}
+
+.dark-danger:hover {
+    background-color: var(--hover-dark-red);
+}
+
+
+.icon-color:hover {
+    color: var(--main-color-blue);
+}

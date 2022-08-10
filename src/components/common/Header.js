@@ -11,18 +11,19 @@ export const Header = () => {
                 </div>
                 {!!auth.currentUser
                     ? <div id='user' className='flex-wrapper'>
-                        
+
                         <div className="search-container">
                             <input className='search-bar' type="text" id="search" name="search" placeholder="Search users" />
                             <button value="Search"><i className="fa fa-search"></i></button>
                         </div>
                         {/* // TODO leave this for later  */}
 
-                        <Link className='navlink' to={"/profile"}>{auth.currentUser.displayName}</Link>
-                        
+
+
                         <div className='dropdown'>
-                            <button className='navlink'>Settings</button>
+                            <Link className='navlink' to={"/profile"}>{auth.currentUser.displayName}</Link>
                             <div className='dropdown-content'>
+                                <Link to={'/settings'}>Edit profile</Link>
                                 <Link to={'/logout'}>Log out</Link>
                             </div>
                         </div>

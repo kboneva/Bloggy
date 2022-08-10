@@ -1,34 +1,21 @@
-import { addNewPost } from "../../services/postService";
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { PostContext } from "../../contexts/PostContext";
 
 export const AddPost = () => {
-    const navigate = useNavigate();
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-
-        const { text } = Object.fromEntries(new FormData(e.target));
-
-        addNewPost(text)
-            .then(() => {
-                navigate('/');
-            })
-            .catch(() => {
-                navigate('/not-found');
-            })
-
-    }
+    const { addPostHandler, addPostToggle } = useContext(PostContext);
 
     return (
-        <form id="post" onSubmit={onSubmit}>
-            <div className="container">
+        <form id="post" onSubmit={addPostHandler}>
+            <div className="border-box">
                 <div className="text">
                     <input type="text" id="text" name="text" placeholder="What's on your mind?" />
                 </div>
 
                 <div>
-                    <input type="submit" className="big-btn theme-btn" value="Post" />
+                    <input type="submit" className="post-btn big-btn primary-color-blue" value="Post" />
+                    <button type="button" onClick={() => addPostToggle()} className="post-btn big-btn">Cancel</button>
                 </div>
+
             </div>
         </form>
     );

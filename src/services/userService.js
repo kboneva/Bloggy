@@ -1,4 +1,4 @@
-import { ref, get, query, set, orderByChild, equalTo, child } from "firebase/database"
+import { ref, get, query, set, orderByChild, equalTo, child, update } from "firebase/database"
 import { db } from "../firebase"
 
 const usersRef = ref(db, 'users');
@@ -47,6 +47,23 @@ export const addNewUser = async (_id, username) => {
     const newUserRef = ref(db, "users/" + _id);
     await set(newUserRef, {
         username: username,
-        avatar: '/avatar.jpg'
+        avatar: '/avatar.jpg',
+        darkTheme: false,
+        theme: "blue"
+    })
+}
+
+export const isDarkTheme = async (_id) => {
+    const snapshot = await get(ref(db, "users/" + _id + "/darkTheme"));
+    if (snapshot.exists()) {
+        return snapshot.val();
+    }
+    else return false;
+}
+
+export const updateThemePreference = async (_id) => {
+    const currentValue = await isDarkTheme(_id);
+    update(ref(db, "users/" + _id), {
+        darkTheme: !currentValue
     })
 }
