@@ -1,52 +1,96 @@
-import {  Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../services/authService";
 import styles from './Login.module.css';
 
 export const Login = () => {
     const navigate = useNavigate();
+    const [input, setInput] = useState({
+        email: '',
+        password: ''
+    })
+    const [errors, setErrors] = useState({
+        email: false,
+        password: false
+    })
+    const [formValid, setFormValid] = useState(false);
+
+    const onChangeHandler = (e) => {
+        setInput(state => ({
+            ...state,
+            [e.target.name]: e.target.value
+        }))
+        setErrors(state => ({
+            ...state,
+            [e.target.name]: false
+        }))
+        setFormValid((/\S+@\S+\.\S+/.test(input.email)) && input.password.length >= 5 && input.password.length <= 50);
+    }
+
 
     const onSubmit = (e) => {
         e.preventDefault();
 
-        const {
-            email,
-            password,
-        } = Object.fromEntries(new FormData(e.target));
-
-
-        login(email, password)
-        .then(() => {
-            navigate('/');
-        })
-        .catch(() => {
-            navigate('/not-found');
-        });
+        login(input.email, input.password)
+            .then(() => {
+                navigate('/');
+            })
+            .catch(() => {
+                navigate('/not-found');
+            });
     }
 
 
+    const emailValidator = (e) => {
+        setErrors(state => ({
+            ...state,
+            email: !(/\S+@\S+\.\S+/.test(input.email))
+        }))
+    }
+
+    const passwordValidator = (e) => {
+        setErrors(state => ({
+            ...state,
+            password: input.password.length < 5 || input.password.length > 50
+        }))
+    }
+
+    
     return (
         <form id="login" onSubmit={onSubmit}>
-                <div className="container">
-                    <h1>Login</h1>
+            <div className="container">
+                <h1>Login</h1>
 
-                    <div className={styles.area}>
-                        <label className={styles.label} htmlFor="email">Email</label>
-                        <input className={styles.input} type="email" id="email" name="email" placeholder="john@email.com" />
-                    </div>
-
-                    <div className={styles.area}>
-                        <label className={styles.label} htmlFor="password">Password</label>
-                        <input className={styles.input} type="password" id="password" name="password" placeholder="*********" />
-                    </div>
-
-                    <div>
-                        <input type="submit" className={styles.btn} value="Login"/>
-                    </div>
-
-                    <div>
-                        <p>Don't have an account? <span><Link className={styles.span} to='/register'>Click here.</Link></span></p>
-                    </div>
+                <div className={styles.area}>
+                    <label className={styles.label} htmlFor="email">Email</label>
+                    <input className={styles.input}
+                        type="email" id="email" name="email"
+                        placeholder="john@email.com"
+                        value={input.email}
+                        onChange={onChangeHandler}
+                        onBlur={emailValidator} />
+                    {errors.email && <p className={styles.error}>Please use a valid email!</p>}
                 </div>
-            </form>
+
+                <div className={styles.area}>
+                    <label className={styles.label} htmlFor="password">Password</label>
+                    <input className={styles.input}
+                        type="password" id="password" name="password"
+                        placeholder="*********"
+                        value={input.password}
+                        onChange={onChangeHandler}
+                        onBlur={passwordValidator} />
+                    {errors.password && <p className={styles.error}>Password should be between 6 and 50 characters long!</p>}
+                </div>
+
+                <div>
+                    <input type="submit" disabled={!formValid} className={styles.btn} value="Login" />
+                </div>
+
+                <div>
+                    <p>Don't have an account? <span><Link className={styles.span} to='/register'>Click here.</Link></span></p>
+                </div>
+            </div>
+        </form>
     );
 }

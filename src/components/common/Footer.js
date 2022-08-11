@@ -12,7 +12,7 @@ export const Footer = () => {
                 </div>
             </div>
             <div>
-                <p className="text-muted m-3"><small>© 2022 Bloggy, made by KrisyYy for SoftUni ReactJS Course.</small></p>
+                <p><small>© 2022 Bloggy, made by KrisyYy for SoftUni ReactJS Course.</small></p>
             </div>
         </footer>
     );

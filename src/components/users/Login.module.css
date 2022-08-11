@@ -37,3 +37,7 @@
 .span:hover {
     color: var(--hover-color-blue) !important;
 }
+
+.error {
+    color: red;
+}

@@ -13,7 +13,7 @@ export const Logout = () => {
             .catch(() => {
                 navigate('/');
             });
-    });
+    }, []);
 
     return null;
 }

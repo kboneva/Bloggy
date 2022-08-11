@@ -24,7 +24,7 @@ export const Post = ({ post }) => {
         return '';
     }
     return (
-        <div className="border">
+        <div className={`${styles.margin} border`}>
             <Link to={`/post/${post._id}`}>
                 <div className="flex">
                     <div className="flexStart">
