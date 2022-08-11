@@ -41,11 +41,11 @@ export const Like = ({postId}) => {
 
     return (
         !!likes.list && <div>
-            <span>{likes.list.length || "0"}</span>
             {!likes.status
-                ? <button className={styles.btn} onClick={likeHandler}><i className="far fa-heart"></i></button>
-                : <button className={styles.btn} onClick={dislikeHandler}><i className="fas fa-heart"></i></button>
+                ? <button className={`${styles.btn} color-blue`} onClick={likeHandler}><i className="far fa-heart"></i></button>
+                : <button className={`${styles.btn} danger`} onClick={dislikeHandler}><i className="fas fa-heart"></i></button>
             }
+            <span>{likes.list.length || "0"} Likes</span>
         </div>
     );
 }

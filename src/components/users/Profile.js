@@ -1,8 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ThemeContext } from "../../contexts/ThemeContext";
 import { auth } from "../../firebase";
-import { follow, isFollowing, unfollow } from "../../services/followService";
+import { follow, getFollowers, unfollow } from "../../services/followService";
 import { getPostsFrom } from "../../services/postService";
 import { getUserByName } from "../../services/userService";
 import { Spinner } from "../common/Spinner";
@@ -12,12 +11,14 @@ import styles from './Profile.module.css';
 export const Profile = () => {
     const { username } = useParams();
     const currentId = auth.currentUser.uid;
-    const { darkTheme } = useContext(ThemeContext);
     const [user, setUser] = useState({
         current: null,
         loaded: false
     })
-    const [following, setFollowing] = useState(false);
+    const [followers, setFollowers] = useState({
+        status: false,
+        list: []
+    });
     const [posts, setPosts] = useState([]);
     const navigate = useNavigate();
 
@@ -38,9 +39,9 @@ export const Profile = () => {
                         .then(data => {
                             setPosts(data);
                         })
-                    isFollowing(currentId, currentUser._id)
+                    getFollowers(currentId, currentUser._id)
                         .then(result => {
-                            setFollowing(result);
+                            setFollowers(result);
                         })
                 }
             });
@@ -49,14 +50,22 @@ export const Profile = () => {
     const followHandler = () => {
         follow(currentId, user.current._id)
             .then(() => {
-                setFollowing(true)
+                const newList = [...followers.list, { _id: currentId }];
+                setFollowers({
+                    status: true,
+                    list: newList
+                })
             });
     }
 
     const unFollowHandler = () => {
         unfollow(currentId, user.current._id)
             .then(() => {
-                setFollowing(false)
+                const newList = followers.list.filter(x => currentId !== x._id)
+                setFollowers({
+                    status: false,
+                    list: newList
+                })
             });
     }
 
@@ -68,11 +77,11 @@ export const Profile = () => {
             <div className="flexStart border">
                 <img src={user.current.avatar} className={styles.avatar} alt="avatar" />
                 <div>
-                    <h1>{user.current.username}</h1> {/* TODO write followers*/}
+                    <h1>{user.current.username} <small className={styles.followers}> - {followers.list.length || "0"} followers</small></h1>
                     {user.current._id !== currentId && <div>
-                        {!following
-                            ? <button className={`${styles.btn} ${darkTheme ? "dark" : "white"}-color-blue`} onClick={followHandler}>Follow</button>
-                            : <button className={`${styles.btn} ${darkTheme ? "dark" : "white"}-danger`} onClick={unFollowHandler}>Unfollow</button>
+                        {!followers.status
+                            ? <button className={`${styles.btn} color-blue`} onClick={followHandler}>Follow</button>
+                            : <button className={`${styles.btn} danger`} onClick={unFollowHandler}>Unfollow</button>
                         }
                     </div>
                     }

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PostContext } from "../../contexts/PostContext";
-import { addNewPost, deletePost } from "../../services/postService";
+import { addNewPost, deletePost, updatePost } from "../../services/postService";
 import { Post } from "./Post";
-import { AddPost } from "./AddPost";
+import { PostForm } from "./PostForm";
 import styles from './PostsList.module.css'
 
 export const PostsList = ({ posts, setPosts, isMe }) => {
@@ -33,6 +33,29 @@ export const PostsList = ({ posts, setPosts, isMe }) => {
             })
     }
 
+    const editPostHandler = (e, _id) => {
+        e.preventDefault();
+
+        const { text } = Object.fromEntries(new FormData(e.target));
+
+        updatePost(_id, text)
+            .then(() =>  {
+                setPosts(state => {
+                    return state.map(x => {
+                        if (x._id === _id) {
+                            x.text = text;
+                        }
+                        return x;
+                    })
+                })
+            })
+            .catch(() => {
+                navigate('/not-found');
+            })
+
+            e.target.reset();
+    }
+
     const deleteHandler = (_id) => {
         deletePost(_id)
             .then(() => {
@@ -41,9 +64,9 @@ export const PostsList = ({ posts, setPosts, isMe }) => {
     }
 
     return (
-        <PostContext.Provider value={{ deleteHandler, addPostHandler, addPostToggle }}>
+        <PostContext.Provider value={{ deleteHandler, addPostHandler, addPostToggle, editPostHandler }}>
             <div>
-                {addPostDiv && <AddPost />}
+                {addPostDiv && <PostForm action="addPost" editPostToggle='' post={null} />}
                 {isMe && !addPostDiv ? <button className={`${styles.post} primary-color-blue`}  onClick={() => addPostToggle()}>Post</button> : ""}
                 {posts.length > 0
                     ? <div >

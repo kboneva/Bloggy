@@ -1,39 +1,29 @@
 import { get, ref, remove, update } from "firebase/database"
 import { db } from "../firebase"
 
-export const getFollowers = async (id) => {
-    const snapshot = await get(ref(db, `follow/to/${id}`))
+export const getFollowers = async (currentId, userId) => {
+    const snapshot = await get(ref(db, `follows/${userId}`))
     if (snapshot.exists()) {
-        return Object.entries(snapshot.val()).map(([id, follow]) => {
+        const list = Object.entries(snapshot.val()).map(([id, follow]) => {
             return {
                 _id: id,
                 ...follow
             }
         })
+        const status = list.some(x => x._id === currentId);
+        return { status, list }
     }
     else {
-        return null;
+        const list = [];
+        const status = false;
+        return { status, list }
     }
-}
-
-export const isFollowing = async (currentId, id) => {
-    const snapshot = await get(ref(db, `follow/from/${currentId}/${id}`));
-    if (snapshot.exists()) {
-        return true;
-    }
-    else return false;
 }
 
 export const follow = async (currentId, id) => {
-    await Promise.all([
-        update(ref(db, `follow/from/${currentId}`), {[id]: true}),
-        update(ref(db, `follow/to/${id}`), {[currentId]: true})
-    ])
+    await update(ref(db, `follows/${id}`), {[currentId]: true});
 }
 
 export const unfollow = async (currentId, id) => {
-    await Promise.all([
-        remove(ref(db, `follow/from/${currentId}/${id}`)),
-        remove(ref(db, `follow/to/${id}/${currentId}`))
-    ])
+    await remove(ref(db, `follows/${id}/${currentId}`))
 }

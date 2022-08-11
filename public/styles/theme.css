@@ -2,9 +2,11 @@
     --light: rgb(245, 245, 245);
     --light-darker: rgb(225, 225, 230);
     --light-darkest: rgb(205, 205, 215);
-    --dark: rgb(35, 45, 55);
-    --dark-darker: rgb(25, 35, 45);
-    --dark-lighter: rgb(50, 65, 80);
+    --dark: rgb(40, 45, 55);
+    --dark-darker: rgb(30, 35, 45);
+    --dark-lighter: rgb(55, 65, 80);
+
+    --inbetween: rgb(140, 145, 150);
 
     --main-color-blue: rgb(15, 175, 220);
     --hover-color-blue: rgb(30, 135, 200);
@@ -19,7 +21,7 @@
     --hover-white-orange: rgb(235, 225, 200);
     --hover-dark-orange: rgb(135, 75, 45);
 
-    --main-color-green: rgb(45, 150, 50);
+    --main-color-green: rgb(40, 177, 47);
 
 
     --hover-white-red: rgb(235, 200, 200);
@@ -28,7 +30,7 @@
     --transition: 0.2s;
 }
 
-* {
+.light-theme, .dark-theme, a, input, textarea, .dropdown-theme, .border, hr, button, .search {
     transition: all var(--transition);
 }
 
@@ -68,7 +70,7 @@
 
 .dark-theme button {
     background-color: var(--dark-lighter);
-    color: var(--light-darker);
+    color: var(--light);
 }
 
 .dark-theme .search {
@@ -103,21 +105,20 @@
     background-color: var(--hover-color-blue) !important;
 }
 
-.white-color-blue:hover {
+.light-theme .color-blue:hover {
     background-color: var(--hover-white-blue);
 }
 
-.dark-color-blue:hover {
+.dark-theme .color-blue:hover {
     background-color: var(--hover-dark-blue);
 }
 
 
-
-.white-danger:hover {
+.light-theme .danger:hover {
     background-color: var(--hover-white-red);
 }
 
-.dark-danger:hover {
+.dark-theme .danger:hover {
     background-color: var(--hover-dark-red);
 }
 

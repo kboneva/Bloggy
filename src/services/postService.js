@@ -1,4 +1,4 @@
-import { ref, push, set, orderByChild, equalTo, get, query, remove, child } from "firebase/database"
+import { ref, push, set, orderByChild, equalTo, get, query, remove, child, update } from "firebase/database"
 import { auth, db } from "../firebase"
 
 const postsRef = ref(db, 'posts');
@@ -47,8 +47,6 @@ export const addNewPost = async (text) => {
     const newPostRef = await push(postsRef, text)
     const date = Date.now().toString();
     await set(newPostRef, {
-        comments: [],
-        likes: [],
         userId: auth.currentUser.uid,
         text: text,
         createdAt: date
@@ -61,5 +59,14 @@ export const addNewPost = async (text) => {
     }
 }
 
+export const updatePost = async (_id, text) => {
+    await update(ref(db, "posts/" + _id), {
+        text: text
+    })
+}
+
 export const deletePost = async (_id) =>
-    await remove(ref(db, "posts/" + _id))
+    await Promise.all([
+        remove(ref(db, "posts/" + _id)),
+        remove(ref(db, "likes/" + _id))
+    ])

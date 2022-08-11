@@ -11,20 +11,20 @@ export const Settings = () => {
         <div>
             <div className="flex border">
                 <p className={styles.text}>Username: {user.displayName}</p>
-                <button className={`${styles.btn} ${darkTheme ? "dark" : "white"}-color-blue`}>Change</button>
+                <button className={`${styles.btn} color-blue`}>Change</button>
             </div>
             {/* avatar */}
             <div className="flex border">
                 <p className={styles.text}>Email: {user.email}</p>
-                <button className={`${styles.btn} ${darkTheme ? "dark" : "white"}-color-blue`}>Change</button>
+                <button className={`${styles.btn} color-blue`}>Change</button>
             </div>
             <div className="flex border">
                 <p className={styles.text}>Verified: {user.emailVerified ? "Yes" : "No"}</p>
-                <button className={`${styles.btn} ${darkTheme ? "dark" : "white"}-color-blue`}>Change</button>
+                <button className={`${styles.btn} color-blue`}>Change</button>
             </div>
             <div className="flex border">
                 <p className={styles.text}>{darkTheme ? "Dark" : "Light"} Theme</p>
-                <button className={styles.invisible} onClick={() => darkThemeToggle(user.uid)}>{darkTheme ? <i className={`${styles.icon} icon-color fas fa-toggle-on`}></i> : <i className={`${styles.icon} icon-color fas fa-toggle-off`}></i>}</button>
+                <button className={styles.invisible} onClick={() => darkThemeToggle(user.uid)}><i className={`${styles.icon} icon-color fas fa-toggle-${darkTheme ? "on" : "off"}`}></i></button>
             </div>
         </div>
     );

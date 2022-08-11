@@ -2,7 +2,7 @@ import { get, ref, remove, update } from "firebase/database"
 import { db } from "../firebase"
 
 export const getLikes = async (currentId, postId) => {
-    const snapshot = await get(ref(db, `like/to/${postId}`))
+    const snapshot = await get(ref(db, `likes/${postId}`))
     if (snapshot.exists()) {
         const list = Object.entries(snapshot.val()).map(([id, like]) => {
             return {
@@ -21,15 +21,9 @@ export const getLikes = async (currentId, postId) => {
 }
 
 export const like = async (currentId, postId) => {
-    await Promise.all([
-        update(ref(db, `like/from/${currentId}`), { [postId]: true }),
-        update(ref(db, `like/to/${postId}`), { [currentId]: true })
-    ])
+    await update(ref(db, `likes/${postId}`), { [currentId]: true })
 }
 
 export const dislike = async (currentId, postId) => {
-    await Promise.all([
-        remove(ref(db, `like/from/${currentId}/${postId}`)),
-        remove(ref(db, `like/to/${postId}/${currentId}`))
-    ])
+    await remove(ref(db, `likes/${postId}/${currentId}`))
 }
