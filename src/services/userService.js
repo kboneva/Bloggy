@@ -53,17 +53,36 @@ export const addNewUser = async (_id, username) => {
     })
 }
 
-export const isDarkTheme = async (_id) => {
-    const snapshot = await get(ref(db, "users/" + _id + "/darkTheme"));
-    if (snapshot.exists()) {
-        return snapshot.val();
-    }
-    else return false;
+export const isDarkTheme = async (currentId) => {
+    const snapshot = await get(ref(db, "users/" + currentId + "/darkTheme"));
+    return snapshot.exists() ? snapshot.val() : false;
 }
 
-export const updateThemePreference = async (_id) => {
-    const currentValue = await isDarkTheme(_id);
-    update(ref(db, "users/" + _id), {
+export const updateThemePreference = async (currentId) => {
+    const currentValue = await isDarkTheme(currentId)
+    await update(ref(db, "users/" + currentId), {
         darkTheme: !currentValue
+    })
+}
+
+export const isUsernameUnique = async (username) => {
+    const snapshot = await get(query(usersRef, orderByChild('username'), equalTo(username)));
+    if (snapshot.exists()) {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+export const allPostPreference = async (currentId) => {
+    const snapshot = await get(ref(db, "users/" + currentId + "/allPostPreference"));
+    return snapshot.exists() ? snapshot.val() : false;
+}
+
+export const updatePostPreference = async (currentId) => {
+    const currentValue = await allPostPreference(currentId);
+    await update(ref(db, "users/" + currentId), {
+        allPostPreference: !currentValue
     })
 }

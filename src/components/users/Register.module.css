@@ -11,6 +11,10 @@
     color: var(--light);
 }
 
+.title {
+    margin-top: 0;
+}
+
 .input {
     font-size: 20px;
     padding: 0.3rem 0.5rem;
@@ -40,4 +44,14 @@
 
 .error {
     color: red;
+}
+
+.container {
+    width: 500px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem;
+    border: 1px solid var(--light-darkest);
+    border-radius: 20px;
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../../services/authService";
+import { isUsernameUnique } from "../../services/userService";
 import styles from './Register.module.css';
 
 export const Register = () => {
@@ -16,7 +17,11 @@ export const Register = () => {
         uniqueUsername: false,
         email: false,
         password: false,
-        rePassword: false
+        rePassword: false,
+    })
+    const [authErrors, setAuthErrors] = useState({
+        usernameNotUnique: false,
+        emailTaken: false
     })
     const [formValid, setFormValid] = useState(false);
 
@@ -27,32 +32,57 @@ export const Register = () => {
         }))
         setErrors(state => ({
             ...state,
-            [e.target.name]: false
+            [e.target.name]: false,
         }))
+        setAuthErrors(false, false);
         setFormValid(
-            input.username.length >= 3 && input.username.length <= 15 
-            && (/\S+@\S+\.\S+/.test(input.email)) 
-            && input.password.length >= 5 && input.password.length <= 50
-            && input.password === input.rePassword);
-            console.log(formValid)
+            input.username.length >= 3 && input.username.length <= 15
+            && (/\S+@\S+\.\S+/.test(input.email))
+            && input.password.length >= 6 && input.password.length <= 50
+            && input.rePassword.length >= 5 && input.rePassword.length <= 51)
     }
 
     const onSubmit = (e) => {
         e.preventDefault();
 
-        
+
         if (input.password !== input.rePassword) {
-            navigate('/not-found');
+            setErrors(state => ({
+                ...state,
+                rePassword: true
+            }))
             return;
         }
 
-        register(input.username, input.email, input.password)
-            .then(() => {
-                navigate('/');
+        isUsernameUnique(input.username)
+            .then(result => {
+                if (!result) {
+                    setAuthErrors(state => ({
+                        ...state,
+                        usernameNotUnique: true
+                    }))
+                    return;
+                }
+
+                register(input.username, input.email, input.password)
+                    .then(() => {
+                        navigate('/');
+                    })
+                    .catch((e) => {
+                        if (e.code === "auth/email-already-in-use") {
+                            setAuthErrors(state => ({
+                                ...state,
+                                emailTaken: true
+                            }))
+                        }
+                        else {
+                            console.log(e.code);
+                            navigate('/not-found');
+                        }
+                    })
             })
-            .catch(() => {
-                navigate('/not-found');
-            })
+
+
     }
 
 
@@ -60,7 +90,6 @@ export const Register = () => {
         setErrors(state => ({
             ...state,
             username: input.username.length < 3 || input.username.length > 15,
-            //TODO unique usernames
         }))
     }
 
@@ -74,7 +103,7 @@ export const Register = () => {
     const passwordValidator = (e) => {
         setErrors(state => ({
             ...state,
-            password: input.password.length < 5 || input.password.length > 50
+            password: input.password.length < 6 || input.password.length > 50
         }))
     }
 
@@ -88,8 +117,8 @@ export const Register = () => {
 
     return (
         <form id="register" onSubmit={onSubmit}>
-            <div className="container">
-                <h1>Register</h1>
+            <div className={styles.container}>
+                <h1 className={styles.title}>Register</h1>
 
                 <div className={styles.area}>
                     <label className={styles.label} htmlFor="username">Username</label>
@@ -137,6 +166,8 @@ export const Register = () => {
 
                 <div>
                     <input type="submit" disabled={!formValid} className={styles.btn} value="Register" />
+                    {authErrors.emailTaken && <p className={styles.error}>Email is already taken!</p>}
+                    {authErrors.usernameNotUnique && <p className={styles.error}>Username is already taken!</p>}
                 </div>
 
                 <div>

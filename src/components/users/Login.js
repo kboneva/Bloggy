@@ -13,6 +13,9 @@ export const Login = () => {
         email: false,
         password: false
     })
+    const [authErrors, setAuthErrors] = useState({
+        doesNotExist: false
+    })
     const [formValid, setFormValid] = useState(false);
 
     const onChangeHandler = (e) => {
@@ -24,6 +27,7 @@ export const Login = () => {
             ...state,
             [e.target.name]: false
         }))
+        setAuthErrors(false ,false);
         setFormValid((/\S+@\S+\.\S+/.test(input.email)) && input.password.length >= 5 && input.password.length <= 50);
     }
 
@@ -35,8 +39,14 @@ export const Login = () => {
             .then(() => {
                 navigate('/');
             })
-            .catch(() => {
-                navigate('/not-found');
+            .catch((e) => {
+                if (e.code === "auth/user-not-found") {
+                    setAuthErrors({doesNotExist: true})
+                }
+                else {
+                    console.log(e.code);
+                    navigate('/not-found');
+                }
             });
     }
 
@@ -58,8 +68,8 @@ export const Login = () => {
     
     return (
         <form id="login" onSubmit={onSubmit}>
-            <div className="container">
-                <h1>Login</h1>
+            <div className={styles.container}>
+                <h1 className={styles.title}>Login</h1>
 
                 <div className={styles.area}>
                     <label className={styles.label} htmlFor="email">Email</label>
@@ -85,6 +95,7 @@ export const Login = () => {
 
                 <div>
                     <input type="submit" disabled={!formValid} className={styles.btn} value="Login" />
+                    {authErrors.doesNotExist && <p className={styles.error}>No such user exists!</p>}
                 </div>
 
                 <div>

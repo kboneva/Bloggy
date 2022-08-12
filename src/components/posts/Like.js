@@ -4,7 +4,7 @@ import { dislike, getLikes, like } from "../../services/likeService";
 import styles from './Like.module.css';
 
 export const Like = ({postId}) => {
-    const currentId = auth.currentUser.uid;
+    const currentId = !!auth.currentUser ? auth.currentUser.uid : '';
     const [likes, setLikes] = useState({
         status: false,
         list: []

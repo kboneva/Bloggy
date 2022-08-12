@@ -39,3 +39,7 @@
 .deleteText {
     color: rgb(206, 66, 66);
 }
+
+.notLink {
+    cursor: default;
+}

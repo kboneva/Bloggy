@@ -77,6 +77,7 @@ function App() {
                         </Routes>
                         : <Routes>
                             <Route path="/" element={<Welcome />} />
+                            <Route path="/Catalog" element={<Catalog />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
                             <Route path="/not-found" element={<Error />} />

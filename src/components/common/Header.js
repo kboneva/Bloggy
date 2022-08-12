@@ -11,6 +11,7 @@ export const Header = () => {
             <div className="headerSection flex">
                 <div>
                     <Link className={styles.logo} to={"/"}>Bloggy</Link>
+                    {!auth.currentUser && <Link className={styles.navlink} to={"/Catalog"}>Catalog</Link>}
                 </div>
                 {!!auth.currentUser
                     ? <div id='user' className="flex">
@@ -22,7 +23,7 @@ export const Header = () => {
 
                     : <div id='guest' className="flex">
                         <Link className={styles.navlink} to={"/login"}>Login</Link>
-                        <Link className={styles.navlink}to={"/register"}>Register</Link>
+                        <Link className={styles.navlink} to={"/register"}>Register</Link>
                     </div>
                 }
             </div>

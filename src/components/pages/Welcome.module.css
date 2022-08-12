@@ -1,0 +1,42 @@
+.mainBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2.5rem;
+}
+
+
+.signBox {
+    width: 400px;
+    border: 1px solid var(--light-darkest);
+    height: 200px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    font-size: 40px;
+    margin: 1rem;
+    text-align: center;
+}
+
+.text {
+    font-size: 22px;
+    margin-bottom: 4rem;
+    text-align: center;
+    width: 500px;
+}
+
+.btn {
+    margin-top: 2rem;
+    width: 250px;
+    height: 50px;
+    text-align: center;
+    border: none;
+    border-radius: 50px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
