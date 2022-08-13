@@ -20,21 +20,19 @@ export const getAllPosts = async () => {
 
 export const getPostsFromFollowing = async (currentId) => {
     const snapshot = await get(ref(db, `follows/from/${currentId}`))
+    let listOfIds = [currentId];
+    const listOfPosts = [];
     if (snapshot.exists()) {
-        const listOfPosts = [];
-        const listOfIds = [
+        listOfIds = [
             ...Object.keys(snapshot.val()),
             currentId
         ];
-        for (let i = 0; i < listOfIds.length; i++) {
-            const result = await getPostsFrom(listOfIds[i]);
-            listOfPosts.push(...result);
-        }
-        return listOfPosts
     }
-    else {
-        return false;
+    for (let i = 0; i < listOfIds.length; i++) {
+        const result = await getPostsFrom(listOfIds[i]);
+        listOfPosts.push(...result);
     }
+    return listOfPosts
 }
 
 export const getPostsFrom = async (_id) => {

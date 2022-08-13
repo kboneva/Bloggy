@@ -23,7 +23,7 @@ export const PostForm = ({ action, editPostToggle, post }) => {
 
     return (
         <form id="post" onSubmit={action == "addPost" ? addPostHandler : (e) => { editPostHandler(e, post._id); editPostToggle(); }}>
-            <div className="border">
+            <div className={`${styles.margin} border`}>
                 <textarea id="text" className={styles.text}
                     defaultValue={action === "editPost" ? post.text : ''}
                     name="text" rows={5} cols={60} placeholder="What's on your mind?"

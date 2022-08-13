@@ -95,7 +95,7 @@ export const Login = () => {
 
                 <div>
                     <input type="submit" disabled={!formValid} className={styles.btn} value="Login" />
-                    {authErrors.doesNotExist && <p className={styles.error}>No such user exists!</p>}
+                    {authErrors.doesNotExist && <p className={styles.error}>Email or password are wrong!</p>}
                 </div>
 
                 <div>

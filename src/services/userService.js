@@ -47,9 +47,10 @@ export const addNewUser = async (_id, username) => {
     const newUserRef = ref(db, "users/" + _id);
     await set(newUserRef, {
         username: username,
-        avatar: '/avatar.jpg',
+        avatar: "https://firebasestorage.googleapis.com/v0/b/webforum-7c715.appspot.com/o/avatars%2FAvatar.jpg?alt=media&token=d628093d-6b1f-4bf8-92c7-761cbe7b82bd",
         darkTheme: false,
-        theme: "blue"
+        theme: "blue",
+        allPostPreference: true
     })
 }
 
@@ -85,4 +86,15 @@ export const updatePostPreference = async (currentId) => {
     await update(ref(db, "users/" + currentId), {
         allPostPreference: !currentValue
     })
+    return !currentValue;
+}
+
+export const updateUsername = async (currentId, username) => {
+    const userRef = ref(db, "users/" + currentId);
+    update(userRef, {username: username});
+}
+
+export const updateAvatar = async (currentId, avatar) => {
+    const userRef = ref(db, "users/" + currentId);
+    update(userRef, {avatar: avatar});
 }

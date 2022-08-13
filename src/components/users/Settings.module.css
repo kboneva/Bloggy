@@ -15,6 +15,30 @@
     cursor: pointer;
 }
 
-.icon {
-    font-size: 36px;
+.toggle {
+    font-size: 34px;
+}
+
+.edit {
+    font-size: 28px;
+}
+
+.avatar {
+    margin-top: 0.25rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.success {
+    margin: 0;
+    font-size: 16px;
+    color: var(--main-color-blue);
+}
+
+.area {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    justify-content: flex-start;
 }

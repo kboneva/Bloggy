@@ -44,14 +44,14 @@ export const Details = () => {
         const { text } = Object.fromEntries(new FormData(e.target));
 
         updatePost(_id, text)
-            .then(() =>  {
-                setPost(state => ({...state, text: text}))
+            .then(() => {
+                setPost(state => ({ ...state, text: text }))
             })
             .catch(() => {
                 navigate('/not-found');
             })
 
-            e.target.reset();
+        e.target.reset();
     }
 
     const deleteConfirmation = () => {
@@ -96,13 +96,23 @@ export const Details = () => {
                     <div className="flex">
                         {currentId === post.userId && !deleteDiv && <span>Delete <button className={`${styles.btn} danger`} onClick={() => deleteConfirmation()}><i className={`${styles.icon} fas fa-times`}></i></button></span>}
                         {deleteDiv && <span className={styles.deleteText}>Are you sure you want to delete?
-                            <button className={`${styles.btn} danger`} onClick={() => deleteHandler()}><i className={`${styles.icon} fas fa-check`}></i></button>
-                            <button className={`${styles.btn} color-blue`} onClick={() => deleteConfirmation()}><i className={`${styles.icon} fas fa-times`}></i></button>
+                            <button className={`${styles.btn} danger`} onClick={() => deleteHandler()}>
+                                <i className={`${styles.icon} fas fa-check`}></i>
+                            </button>
+                            <button className={`${styles.btn} color-blue`} onClick={() => deleteConfirmation()}>
+                                <i className={`${styles.icon} fas fa-times`}></i>
+                            </button>
                         </span>}
-                        {currentId === post.userId && <span>Edit <button className={`${styles.btn} color-blue`} onClick={() => editPostToggle()}><i className={`${styles.icon} fas fa-edit`}></i></button></span>}
+                        {currentId === post.userId &&
+                            <span>Edit
+                                <button className={`${styles.btn} color-blue`} onClick={() => editPostToggle()}>
+                                    <i className={`${styles.icon} fas fa-edit`}></i>
+                                </button>
+                            </span>}
                     </div>
                 </div>
             </div>
+            
             {editPostDiv &&
                 <form id="post" onSubmit={(e) => { editPostHandler(e, postId); editPostToggle(); }}>
                     <div className="border">

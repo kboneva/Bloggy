@@ -15,21 +15,40 @@ export const Catalog = () => {
         allPostPreference(currentId)
             .then(result => {
                 setDisplayFollowing(!result);
+                if (result) {
+                    getAllPosts()
+                        .then(data => {
+                            setPosts(data);
+                        })
+                }
+                else {
+                    getPostsFromFollowing(currentId)
+                        .then(data => {
+                            setFollowingPosts(data);
+                        })
+                    
+                }
             })
-        getAllPosts()
-            .then(data => {
-                setPosts(data);
-            })
-        getPostsFromFollowing(currentId)
-            .then(data => {
-                setFollowingPosts(data);
-            })
+        
     }, [])
 
     const postsToggle = () => {
         updatePostPreference(currentId)
-            .then(() => {
-                setDisplayFollowing(!displayFollowing);
+            .then(result => {
+                setDisplayFollowing(!result);
+                if (result) {
+                    getAllPosts()
+                        .then(data => {
+                            setPosts(data);
+                        })
+                }
+                else {
+                    getPostsFromFollowing(currentId)
+                        .then(data => {
+                            setFollowingPosts(data);
+                        })
+                    
+                }
             })
 
     }
@@ -39,8 +58,8 @@ export const Catalog = () => {
             <h1 className={styles.title}>Home</h1>
             {!!currentId && <button className={`${styles.btn} color-blue`} onClick={() => postsToggle()}>Show {displayFollowing ? "all posts" : "posts from people you follow"}</button>}
             {displayFollowing
-                ? <PostsList posts={followingPosts} setPosts={setPosts} isMe={!!auth.currentUser} />
-                : <PostsList posts={posts} setPosts={setFollowingPosts} isMe={!!auth.currentUser} />}
+                ? <PostsList posts={followingPosts} setPosts={setFollowingPosts} isMe={!!auth.currentUser} />
+                : <PostsList posts={posts} setPosts={setPosts} isMe={!!auth.currentUser} />}
 
         </div>
     );

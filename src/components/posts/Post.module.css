@@ -38,6 +38,9 @@
 
 .deleteText {
     color: rgb(206, 66, 66);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
 }
 
 .notLink {
