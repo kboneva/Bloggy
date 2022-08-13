@@ -10,6 +10,8 @@
     border-radius: 50px;
     font-size: 16px;
     cursor: pointer;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
 }
 
 .followers{

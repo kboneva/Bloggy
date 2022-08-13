@@ -5,9 +5,10 @@ import styles from './Dropdown.module.css';
 export const Dropdown = () => {
     return (
         <div className={styles.dropdown}>
-            <Link className={styles.navlink} to={"/profile"}>{auth.currentUser.displayName}</Link>
+            <span className={styles.navlink}>{auth.currentUser.displayName}</span>
             <div className={styles.content}>
-                <Link className={`${styles.link} dropdown-theme`} to={'/settings'}>Edit profile</Link>
+                <Link className={`${styles.link} dropdown-theme`} to={"/profile"}>Profile</Link>
+                <Link className={`${styles.link} dropdown-theme`} to={'/settings'}>Settings</Link>
                 <Link className={`${styles.link} dropdown-theme`} to={'/logout'}>Log out</Link>
             </div>
         </div>

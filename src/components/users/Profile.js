@@ -20,6 +20,7 @@ export const Profile = () => {
         list: []
     });
     const [posts, setPosts] = useState([]);
+    const [maxCount, setMaxCount] = useState(0);
     const navigate = useNavigate();
 
 
@@ -38,6 +39,7 @@ export const Profile = () => {
                     getPostsFrom(currentUser._id)
                         .then(data => {
                             setPosts(data);
+                            setMaxCount(data.length);
                         })
                     getFollowers(currentId, currentUser._id)
                         .then(result => {
@@ -77,17 +79,20 @@ export const Profile = () => {
             <div className="flexStart border">
                 <img src={user.current.avatar} className={styles.avatar} alt="avatar" />
                 <div>
-                    <h1>{user.current.username} <small className={styles.followers}> - {followers.list.length || "0"} followers</small></h1>
-                    {user.current._id !== currentId && <div>
-                        {!followers.status
-                            ? <button className={`${styles.btn} color-blue`} onClick={followHandler}>Follow</button>
-                            : <button className={`${styles.btn} danger`} onClick={unFollowHandler}>Unfollow</button>
+                    <div className="flex">
+                        <h1>{user.current.username} <small className={styles.followers}> - {followers.list.length || "0"} followers</small></h1>
+                        {user.current._id !== currentId && <div>
+                            {!followers.status
+                                ? <button className={`${styles.btn} color-blue`} onClick={followHandler}>Follow</button>
+                                : <button className={`${styles.btn} danger`} onClick={unFollowHandler}>Unfollow</button>
+                            }
+                        </div>
                         }
                     </div>
-                    }
+                    <p>{maxCount} Posts</p>
                 </div>
             </div>
-            <PostsList posts={posts} setPosts={setPosts} isMe={user.current._id === currentId} />
+            <PostsList posts={posts} setPosts={setPosts} setMaxCount={setMaxCount} isMe={user.current._id === currentId} />
         </div>
     );
 }

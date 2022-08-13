@@ -1,0 +1,14 @@
+.upperRow {
+    font-size: 24px;
+    margin: auto;
+    justify-content: center;
+}
+
+.contacts {
+    margin: 1rem 0;
+}
+
+.copyright {
+    margin: 0.5rem 0;
+    font-size: 14px;
+}

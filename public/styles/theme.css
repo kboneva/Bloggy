@@ -30,7 +30,7 @@
     --transition: 0.2s;
 }
 
-.light-theme, .dark-theme, a, input, textarea, .dropdown-theme, .border, hr, button, .search {
+.light-theme, .dark-theme, a, input, textarea, .dropdown-theme, .border, hr, button, .search, footer {
     transition: all var(--transition);
 }
 
@@ -44,7 +44,7 @@
     border: 1px solid var(--light-darker);
 }
 
-.light-theme .dropdown-theme:hover {
+.light-theme .dropdown-theme:hover, .light-theme footer, .light-theme footer a {
     background-color: var(--light-darker);
 }
 
@@ -73,7 +73,7 @@
     color: var(--light);
 }
 
-.dark-theme .search {
+.dark-theme .search, .dark-theme footer, .dark-theme footer a {
     background-color: var(--dark-darker);
     color: var(--light-darker);
 }

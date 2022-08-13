@@ -14,12 +14,13 @@
 footer{
     text-align: center;
     margin-top:auto; 
+    position: sticky;
+    right: 0;
+    bottom: 0;
 }
 
-footer .upper-row {
-    font-size: 24px;
-    margin: auto;
-    justify-content: center;
+main {
+    height: 90%;
 }
 
 .headerSection, .footerSection {
