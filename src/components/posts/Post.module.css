@@ -28,6 +28,11 @@
     font-size: 18px;
 }
 
+.image {
+    max-width: 80%;
+    max-height: 80%;
+}
+
 .margin {
     margin-bottom: 1rem;
 }

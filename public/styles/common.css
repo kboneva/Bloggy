@@ -2,6 +2,11 @@ a {
     text-decoration: none;
 }
 
+hr {
+    border: none;
+    height: 1px;
+}
+
 .border {
     padding: 1rem;
     margin-top: -2px;

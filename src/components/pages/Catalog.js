@@ -123,7 +123,7 @@ export const Catalog = () => {
         <div className={styles.box}>
             <h1 className={styles.title}>Home</h1>
             {!!currentId && <button className={`${styles.btn} color-blue`} onClick={() => postsToggle()}>Show {displayFollowing ? "all posts" : "posts from people you follow"}</button>}
-            <PostsList posts={posts} setPosts={setPosts} setMaxCount={setMaxCount} isMe={!!auth.currentUser} />
+            <PostsList posts={posts} setPosts={setPosts} setMaxCount={setMaxCount} isMe={auth.currentUser} />
             {isLoading && <div>...</div>}
         </div>
     );

@@ -88,6 +88,7 @@ export const Details = () => {
                         <Link to={`/${user.username}`}><span className={styles.username}>{user.username}</span></Link>
                         <p className={`${styles.date}`}>Posted on: {new Date(parseInt(post.createdAt)).toLocaleDateString()}</p>
                         <p className={styles.text}>{post.text}</p>
+                        {!!post.image && <img src={post.image} className={styles.image} alt=""></img>}
                     </div>
                 </div>
                 <hr />

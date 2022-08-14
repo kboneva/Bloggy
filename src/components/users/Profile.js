@@ -47,7 +47,7 @@ export const Profile = () => {
                         })
                 }
             });
-    }, [])
+    }, [username])
 
     const followHandler = () => {
         follow(currentId, user.current._id)

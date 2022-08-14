@@ -1,5 +1,5 @@
 import { ref, get, query, set, orderByChild, equalTo, child, update } from "firebase/database"
-import { db } from "../firebase"
+import { db, defaultAvatar } from "../firebase"
 
 const usersRef = ref(db, 'users');
 
@@ -43,11 +43,29 @@ export const getUserById = async (_id) => {
     }
 }
 
+
+export const searchUsers = async (query) => {
+    const snapshot = await get(ref(db, "users/"));
+    if (snapshot.exists()) {
+        const list = Object.entries(snapshot.val()).map(([id, user]) => {
+            return {
+                _id: id,
+                ...user
+            }
+        }).filter(x => x.username.toLowerCase().includes(query.toLowerCase()))
+        return list;
+    }
+    else {
+        return []
+    }
+}
+
+
 export const addNewUser = async (_id, username) => {
     const newUserRef = ref(db, "users/" + _id);
     await set(newUserRef, {
         username: username,
-        avatar: "https://firebasestorage.googleapis.com/v0/b/webforum-7c715.appspot.com/o/avatars%2FAvatar.jpg?alt=media&token=d628093d-6b1f-4bf8-92c7-761cbe7b82bd",
+        avatar: defaultAvatar,
         darkTheme: false,
         theme: "blue",
         allPostPreference: true

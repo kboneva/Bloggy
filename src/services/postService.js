@@ -1,5 +1,6 @@
 import { ref, push, set, orderByChild, equalTo, get, query, remove, child, update, limitToFirst, limitToLast } from "firebase/database"
 import { auth, db } from "../firebase"
+import { deleteImage, uploadImageInPost } from "./fileService";
 
 const postsRef = ref(db, 'posts');
 
@@ -112,19 +113,37 @@ export const getPostById = async (_id) => {
     }
 }
 
-export const addNewPost = async (text) => {
+export const addNewPost = async (text, image) => {
     const newPostRef = await push(postsRef, text)
     const date = Date.now().toString();
-    await set(newPostRef, {
-        userId: auth.currentUser.uid,
-        text: text,
-        createdAt: date
-    })
-    return {
-        _id: newPostRef.key,
-        userId: auth.currentUser.uid,
-        text: text,
-        createdAt: date
+    if (image === null) {
+        await set(newPostRef, {
+            userId: auth.currentUser.uid,
+            text: text,
+            createdAt: date
+        })
+        return {
+            _id: newPostRef.key,
+            userId: auth.currentUser.uid,
+            text: text,
+            createdAt: date
+        }
+    }
+    else {
+        const url = await uploadImageInPost(image)
+        await set(newPostRef, {
+            userId: auth.currentUser.uid,
+            text: text,
+            createdAt: date,
+            image: url
+        })
+        return {
+            _id: newPostRef.key,
+            userId: auth.currentUser.uid,
+            text: text,
+            createdAt: date,
+            image: url
+        }
     }
 }
 
@@ -134,8 +153,13 @@ export const updatePost = async (_id, text) => {
     })
 }
 
-export const deletePost = async (_id) =>
+export const deletePost = async (_id, image) => {
+    if (!!image) {
+        await deleteImage(image);
+    }
     await Promise.all([
         remove(ref(db, "posts/" + _id)),
         remove(ref(db, "likes/" + _id))
     ])
+}
+    

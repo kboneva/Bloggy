@@ -1,7 +1,8 @@
 
-import { auth } from "../firebase";
+import { auth, defaultAvatar } from "../firebase";
 import { addNewUser, updateAvatar, updateUsername } from "./userService";
 import { createUserWithEmailAndPassword, EmailAuthProvider, reauthenticateWithCredential, signInWithEmailAndPassword, signOut, updateEmail, updatePassword, updateProfile } from "firebase/auth"
+import { deleteImage } from "./fileService";
 
 
 export const login = async (email, password) =>
@@ -11,7 +12,7 @@ export const register = async (username, email, password) =>
     await createUserWithEmailAndPassword(auth, email, password)
         .then(async (userCredential) => {
             const user = userCredential.user;
-            const avatarUrl = "https://firebasestorage.googleapis.com/v0/b/webforum-7c715.appspot.com/o/avatars%2FAvatar.jpg?alt=media&token=d628093d-6b1f-4bf8-92c7-761cbe7b82bd";
+            const avatarUrl = defaultAvatar;
             await Promise.all([updateProfile(user, { displayName: username, photoURL: avatarUrl }), addNewUser(user.uid, username)]);
         })
 
@@ -29,6 +30,9 @@ export const changeUsername = async (username) => {
 
 export const changeAvatar = async (avatar) => {
     const currentUser = auth.currentUser;
+    if (currentUser.photoURL !== defaultAvatar) {
+        await deleteImage(currentUser.photoURL);
+    }
     await Promise.all([
         updateProfile(currentUser, { photoURL: avatar }),
         updateAvatar(currentUser.uid, avatar)

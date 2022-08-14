@@ -57,7 +57,7 @@
 }
 
 
-.dark-theme, .dark-theme a {
+.dark-theme, .dark-theme a, .dark-theme .searchRes {
     background-color: var(--dark);
     color: var(--light);
 }
@@ -92,7 +92,7 @@
 }
 
 .dark-theme hr {
-    color: var(--dark-lighter)
+    background-color: var(--dark-lighter);
 }
 
 

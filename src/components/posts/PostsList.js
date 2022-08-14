@@ -14,12 +14,12 @@ export const PostsList = ({ posts, setPosts, setMaxCount, isMe }) => {
         setAddPostDiv(!addPostDiv)
     }
 
-    const addPostHandler = (e) => {
+    const addPostHandler = (e, image) => {
         e.preventDefault();
 
         const { text } = Object.fromEntries(new FormData(e.target));
 
-        addNewPost(text)
+        addNewPost(text, image)
             .then(newPost => {
                 setPosts(state => [
                     newPost,
@@ -57,8 +57,8 @@ export const PostsList = ({ posts, setPosts, setMaxCount, isMe }) => {
         e.target.reset();
     }
 
-    const deleteHandler = (_id) => {
-        deletePost(_id)
+    const deleteHandler = (_id, image) => {
+        deletePost(_id, image)
             .then(() => {
                 setPosts(state => state.filter(x => x._id !== _id));
                 setMaxCount(state => state - 1)
