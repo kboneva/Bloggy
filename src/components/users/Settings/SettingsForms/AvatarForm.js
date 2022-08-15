@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { auth } from '../../../firebase';
-import { changeAvatar } from '../../../services/authService';
-import { uploadAvatar } from '../../../services/fileService';
+import { auth } from '../../../../firebase';
+import { changeAvatar } from '../../../../services/authService';
+import { uploadAvatar } from '../../../../services/fileService';
 import styles from './Form.module.css'
 
 export const AvatarForm = () => {

@@ -9,8 +9,8 @@ export const Welcome = () => {
             <h1 className={styles.title}>Welcome!</h1>
             <p className={styles.text}>Bloggy is a place where you can share your experiences with others.</p>
             <div className={styles.signBox}>
-            <button onClick={() => navigate('/register')} className={`${styles.btn} primary-color-blue`} >Create an Account</button>
-            <button onClick={() => navigate('/login')} className={`${styles.btn} `}>Login</button>
+                <button onClick={() => navigate('/register')} className={`${styles.btn} primary-color-blue`} >Create an Account</button>
+                <button onClick={() => navigate('/login')} className={`${styles.btn} `}>Login</button>
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { register } from "../../services/authService";
-import { isUsernameUnique } from "../../services/userService";
+import { register } from "../../../services/authService";
+import { isUsernameUnique } from "../../../services/userService";
 import styles from './Register.module.css';
 
 export const Register = () => {

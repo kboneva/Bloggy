@@ -2,9 +2,9 @@
     --light: rgb(245, 245, 245);
     --light-darker: rgb(225, 225, 230);
     --light-darkest: rgb(205, 205, 215);
-    --dark: rgb(40, 45, 55);
-    --dark-darker: rgb(30, 35, 45);
-    --dark-lighter: rgb(55, 65, 80);
+    --dark: rgb(30, 35, 45);
+    --dark-darker: rgb(20, 23, 30);
+    --dark-lighter: rgb(45, 55, 70);
 
     --inbetween: rgb(140, 145, 150);
 
@@ -24,6 +24,8 @@
     --main-color-green: rgb(40, 177, 47);
 
 
+    --primary-color-red: rgb(200, 45, 45);
+    --hover-color-red: rgb(165, 35, 35);
     --hover-white-red: rgb(235, 200, 200);
     --hover-dark-red: rgb(120, 60, 65);
 
@@ -122,6 +124,17 @@
     background-color: var(--hover-dark-red);
 }
 
+.primary-danger {
+    background-color: var(--primary-color-red) !important;
+}
+
+.primary-danger:hover {
+    background-color: var(--hover-color-red) !important;
+}
+
+.primary-danger-text {
+    color: var(--primary-color-red)
+}
 
 .icon-color:hover {
     color: var(--main-color-blue);

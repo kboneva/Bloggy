@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { PostContext } from "../../contexts/PostContext";
-import { addNewPost, deletePost, updatePost } from "../../services/postService";
-import { Post } from "./Post";
-import { PostForm } from "./PostForm";
+import { PostContext } from "../../../contexts/PostContext";
+import { addNewPost, deletePost, updatePost } from "../../../services/postService";
+import { Post } from "./Post/Post";
+import { PostForm } from "./PostForm/PostForm";
 import styles from './PostsList.module.css'
 
 export const PostsList = ({ posts, setPosts, setMaxCount, isMe }) => {
@@ -34,10 +34,26 @@ export const PostsList = ({ posts, setPosts, setMaxCount, isMe }) => {
             })
     }
 
-    const editPostHandler = (e, _id) => {
+    const editPostHandler = (e, _id, isRemovingImage) => {
         e.preventDefault();
 
         const { text } = Object.fromEntries(new FormData(e.target));
+        
+        if (isRemovingImage) {
+            if (text.length > 0) {
+                setPosts(state => {
+                    return state.map(x => {
+                        if (x._id === _id) {
+                            x.image = null;
+                        }
+                        return x;
+                    })
+                })
+            }
+            else {
+                deleteHandler(_id, null);
+            }
+        }
 
         updatePost(_id, text)
             .then(() => {

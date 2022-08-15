@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { auth } from '../../firebase';
-import { Search } from './Search';
-import { Dropdown } from './Dropdown';
+import { auth } from '../../../firebase';
+import { Search } from './Search/Search';
+import { Dropdown } from './Dropdown/Dropdown';
 import styles from './Header.module.css'
 
 export const Header = () => {

@@ -4,16 +4,16 @@ import { ThemeContext } from './contexts/ThemeContext';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { Spinner } from './components/common/Spinner';
-import { Header } from './components/common/Header';
-import { Footer } from './components/common/Footer';
-import { Catalog } from "./components/pages/Catalog";
-import { Register } from "./components/users/Register";
-import { Login } from "./components/users/Login";
+import { Header } from './components/common/Header/Header';
+import { Footer } from './components/common/Footer/Footer';
+import { Catalog } from "./components/pages/Catalog/Catalog";
+import { Register } from "./components/users/Register/Register";
+import { Login } from "./components/users/Login/Login";
 import { Logout } from './components/users/Logout';
-import { Error } from "./components/pages/Error";
-import { Profile } from './components/users/Profile';
-import { Settings } from './components/users/Settings';
-import { Welcome } from './components/pages/Welcome';
+import { Error } from "./components/pages/Error/Error";
+import { Profile } from './components/users/Profile/Profile';
+import { Settings } from './components/users/Settings/Settings';
+import { Welcome } from './components/pages/Welcome/Welcome';
 import { Details } from './components/posts/Details';
 import { isDarkTheme, updateThemePreference } from './services/userService';
 

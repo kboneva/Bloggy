@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { auth } from '../../../firebase';
-import { changePassword } from '../../../services/authService';
+import { auth } from '../../../../firebase';
+import { changePassword } from '../../../../services/authService';
 import styles from './Form.module.css'
 
 export const PasswordForm = () => {

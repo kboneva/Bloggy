@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { searchUsers } from "../../services/userService";
+import { searchUsers } from "../../../../services/userService";
 import styles from './Search.module.css'
 
 export const Search = () => {

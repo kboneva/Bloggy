@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { PostContext } from "../../contexts/PostContext";
-import { auth } from "../../firebase";
-import { getUserById } from "../../services/userService";
-import { Like } from "./Like";
+import { PostContext } from "../../../../contexts/PostContext";
+import { auth } from "../../../../firebase";
+import { getUserById } from "../../../../services/userService";
+import { Like } from "../../Like";
 import styles from './Post.module.css'
-import { PostForm } from "./PostForm";
+import { PostForm } from "../PostForm/PostForm";
 
 export const Post = ({ post }) => {
     const [user, setUser] = useState(null);
@@ -70,12 +70,13 @@ export const Post = ({ post }) => {
                         </div>
                     </div>
                 </div>
-                : <div className="flexStart">
+                : <div className={`${styles.margin} border flexStart`}>
                 <img src={user.avatar} className={styles.avatar} alt="" />
 
                 <div className={styles.textBox}>
                     <span className={styles.username}>{user.username}</span>
                     <div className={styles.text}>{post.text}</div>
+                    {!!post.image && <img src={post.image} className={styles.image} alt=""></img>}
                 </div>
             </div>}
             {editPostDiv && <PostForm action="editPost" editPostToggle={editPostToggle} post={post} />}

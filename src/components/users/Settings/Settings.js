@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { ThemeContext } from "../../contexts/ThemeContext";
-import { auth } from "../../firebase";
+import { ThemeContext } from "../../../contexts/ThemeContext";
+import { auth } from "../../../firebase";
 import styles from './Settings.module.css';
 import { AvatarForm } from "./SettingsForms/AvatarForm";
 import { EmailForm } from "./SettingsForms/EmailForm";

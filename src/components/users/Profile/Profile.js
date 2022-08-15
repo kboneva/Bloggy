@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { auth } from "../../firebase";
-import { follow, getFollowers, unfollow } from "../../services/followService";
-import { getPostsFrom } from "../../services/postService";
-import { getUserByName } from "../../services/userService";
-import { Spinner } from "../common/Spinner";
-import { PostsList } from "../posts/PostsList";
+import { auth } from "../../../firebase";
+import { follow, getFollowers, unfollow } from "../../../services/followService";
+import { getPostsFrom } from "../../../services/postService";
+import { getUserByName } from "../../../services/userService";
+import { Spinner } from "../../common/Spinner";
+import { PostsList } from "../../posts/PostsList/PostsList";
 import styles from './Profile.module.css';
 
 export const Profile = () => {

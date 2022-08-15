@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { auth } from '../../../firebase';
-import { changeUsername } from '../../../services/authService';
-import { isUsernameUnique } from '../../../services/userService';
+import { auth } from '../../../../firebase';
+import { changeUsername } from '../../../../services/authService';
+import { isUsernameUnique } from '../../../../services/userService';
 import styles from './Form.module.css'
 
 export const UsernameForm = () => {

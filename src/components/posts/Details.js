@@ -14,7 +14,11 @@ export const Details = () => {
     const [user, setUser] = useState(null);
     const currentId = auth.currentUser.uid;
     const [editPostDiv, setEditPostDiv] = useState(false);
+    const [input, setInput] = useState('');
+    const [isRemovingImage, setIsRemovingImage] = useState(false);
     const [deleteDiv, setDeleteDiv] = useState(false);
+    const [imageExpandDiv, setImageExpandDiv] = useState(false);
+    const body = document.querySelector("body");
     const navigate = useNavigate();
     const [error, setError] = useState({
         empty: false,
@@ -30,12 +34,14 @@ export const Details = () => {
                     .then(user => {
                         setUser(user);
                     })
-
+                setInput(postResult.text);
             })
     }, [])
 
     const editPostToggle = () => {
         setEditPostDiv(!editPostDiv)
+        setIsRemovingImage(false);
+
     }
 
     const editPostHandler = (e, _id) => {
@@ -66,15 +72,32 @@ export const Details = () => {
     }
 
     const onChange = (e) => {
-        setFormValid(e.target.value > 0 && e.target.value.length <= 400)
+        setInput(e.target.value)
+        setFormValid(e.target.value.length > 0 && e.target.value.length <= 400)
     }
 
     const validator = (e) => {
         setError(() => ({
-            empty: e.target.value.length === 0,
+            empty: e.target.value.length === 0 && !post.image,
             tooLong: e.target.value.length > 400
         }))
     }
+
+    const editImageOut = () => {
+        setIsRemovingImage(true);
+    }
+
+
+    const expandImage = (x) => {
+        setImageExpandDiv(x);
+        if (x) {
+            body.style.overflow = "hidden";
+        }
+        else {
+            body.style.overflow = "auto";
+        }
+    }
+
 
     if (!post || !user) {
         return <Spinner />
@@ -88,7 +111,16 @@ export const Details = () => {
                         <Link to={`/${user.username}`}><span className={styles.username}>{user.username}</span></Link>
                         <p className={`${styles.date}`}>Posted on: {new Date(parseInt(post.createdAt)).toLocaleDateString()}</p>
                         <p className={styles.text}>{post.text}</p>
-                        {!!post.image && <img src={post.image} className={styles.image} alt=""></img>}
+
+                        {!!post.image
+                            && <div>
+                                <img src={post.image} onClick={() => expandImage(true)} className={styles.image} alt=""></img>
+                                {imageExpandDiv
+                                    && <div className={styles.background} onClick={() => expandImage(false)}>
+                                        <img src={post.image} className={styles.expandedImage} alt=""></img>
+                                    </div>}
+                            </div>}
+
                     </div>
                 </div>
                 <hr />
@@ -113,20 +145,31 @@ export const Details = () => {
                     </div>
                 </div>
             </div>
-            
+
             {editPostDiv &&
                 <form id="post" onSubmit={(e) => { editPostHandler(e, postId); editPostToggle(); }}>
                     <div className="border">
                         <textarea id="text" className={styles.textarea}
-                            defaultValue={post.text}
+                            value={input}
                             name="text" rows={5} cols={60} placeholder="What's on your mind?"
                             onBlur={validator}
                             onChange={onChange} ></textarea>
                         {error.empty && <p className={styles.error}>Post can't be empty!</p>}
                         {error.tooLong && <p className={styles.error}>Post should be under 400 characters long!</p>}
 
-                        <input type="submit" className={`${styles.post} primary-color-blue`} value="Edit" />
-                        <button type="button" disabled={formValid} onClick={() => editPostToggle()} className={styles.cancel}>Cancel</button>
+                        <div>
+                            {!!post.image && !isRemovingImage
+                                && <div className={styles.editContainer}>
+                                    <button className={`${styles.removeImage} danger`} onClick={() => editImageOut()}><i className={`${styles.icon} fas fa-times`}></i></button>
+                                    <img className={styles.editImage} src={post.image} alt=""></img>
+                                </div>}
+                            {isRemovingImage && input === '' && <p className="primary-danger-text">Empty posts with no text or image will be deleted!</p>}
+                        </div>
+
+                        <div className={styles.buttons}>
+                            <input type="submit" className={`${styles.post} primary-color-blue`} value="Edit" />
+                            <button type="button" disabled={formValid} onClick={() => editPostToggle()} className={styles.cancel}>Cancel</button>
+                        </div>
                     </div>
                 </form>}
         </div>
