@@ -14,7 +14,7 @@ import { Error } from "./components/pages/Error/Error";
 import { Profile } from './components/users/Profile/Profile';
 import { Settings } from './components/users/Settings/Settings';
 import { Welcome } from './components/pages/Welcome/Welcome';
-import { Details } from './components/posts/Details';
+import { Details } from './components/posts/Details/Details';
 import { isDarkTheme, updateThemePreference } from './services/userService';
 
 import './App.css';

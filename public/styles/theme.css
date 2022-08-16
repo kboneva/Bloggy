@@ -55,7 +55,7 @@
 }
 
 .light-theme hr {
-    color: var(--light-darker)
+    background-color: var(--light-darkest)
 }
 
 

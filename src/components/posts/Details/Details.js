@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-import { deletePost, getPostById, updatePost } from "../../services/postService";
-import { getUserById } from "../../services/userService";
-import { Spinner } from "../common/Spinner";
-import { Like } from "./Like";
+import { deletePost, getPostById, updatePost } from "../../../services/postService";
+import { getUserById } from "../../../services/userService";
+import { Spinner } from "../../common/Spinner";
+import { Like } from "../Like/Like";
 import styles from './Details.module.css';
-import { auth } from "../../firebase";
+import { auth } from "../../../firebase";
+import { CommentSection } from "./CommentSection/CommentSection";
 
 export const Details = () => {
     const { postId } = useParams();
@@ -26,6 +27,7 @@ export const Details = () => {
     });
     const [formValid, setFormValid] = useState(false);
 
+
     useEffect(() => {
         getPostById(postId)
             .then(postResult => {
@@ -38,11 +40,12 @@ export const Details = () => {
             })
     }, [])
 
+
     const editPostToggle = () => {
         setEditPostDiv(!editPostDiv)
         setIsRemovingImage(false);
-
     }
+
 
     const editPostHandler = (e, _id) => {
         e.preventDefault();
@@ -60,9 +63,11 @@ export const Details = () => {
         e.target.reset();
     }
 
+
     const deleteConfirmation = () => {
         setDeleteDiv(!deleteDiv);
     }
+
 
     const deleteHandler = () => {
         deletePost(postId)
@@ -71,10 +76,12 @@ export const Details = () => {
             });
     }
 
+
     const onChange = (e) => {
         setInput(e.target.value)
         setFormValid(e.target.value.length > 0 && e.target.value.length <= 400)
     }
+
 
     const validator = (e) => {
         setError(() => ({
@@ -82,6 +89,7 @@ export const Details = () => {
             tooLong: e.target.value.length > 400
         }))
     }
+
 
     const editImageOut = () => {
         setIsRemovingImage(true);
@@ -104,7 +112,7 @@ export const Details = () => {
     }
     return (
         <div>
-            <div className={`border ${editPostDiv ? "disabled" : ""}`}>
+            <div className={`border ${styles.margin} ${editPostDiv ? "disabled" : ""}`}>
                 <div className="flexStart">
                     <Link to={`/${user.username}`}><img src={user.avatar} className={styles.avatar} alt="" /></Link>
                     <div>
@@ -125,7 +133,7 @@ export const Details = () => {
                 </div>
                 <hr />
                 <div className={`${styles.buttons} flex`}>
-                    <Like postId={postId} />
+                    <Like postId={postId} detailed={true} left={false}/>
                     <div className="flex">
                         {currentId === post.userId && !deleteDiv && <span>Delete <button className={`${styles.btn} danger`} onClick={() => deleteConfirmation()}><i className={`${styles.icon} fas fa-times`}></i></button></span>}
                         {deleteDiv && <span className={styles.deleteText}>Are you sure you want to delete?
@@ -147,11 +155,11 @@ export const Details = () => {
             </div>
 
             {editPostDiv &&
-                <form id="post" onSubmit={(e) => { editPostHandler(e, postId); editPostToggle(); }}>
+                <form className= {styles.margin} id="post" onSubmit={(e) => { editPostHandler(e, postId); editPostToggle(); }}>
                     <div className="border">
                         <textarea id="text" className={styles.textarea}
                             value={input}
-                            name="text" rows={5} cols={60} placeholder="What's on your mind?"
+                            name="text" rows={5} placeholder="What's on your mind?"
                             onBlur={validator}
                             onChange={onChange} ></textarea>
                         {error.empty && <p className={styles.error}>Post can't be empty!</p>}
@@ -167,11 +175,13 @@ export const Details = () => {
                         </div>
 
                         <div className={styles.buttons}>
-                            <input type="submit" className={`${styles.post} primary-color-blue`} value="Edit" />
-                            <button type="button" disabled={formValid} onClick={() => editPostToggle()} className={styles.cancel}>Cancel</button>
+                            <input type="submit" disabled={!formValid} className={`${styles.post} primary-color-blue`} value="Edit" />
+                            <button type="button" onClick={() => editPostToggle()} className={styles.cancel}>Cancel</button>
                         </div>
                     </div>
                 </form>}
+
+           <CommentSection postId={postId} commentsFromPost={post.comments || null} />
         </div>
     );
 }

@@ -68,7 +68,7 @@ export const PostForm = ({ action, editPostToggle, post }) => {
             <div className={`${styles.margin} border`}>
                 <textarea id="text" className={styles.text}
                     value={input}
-                    name="text" rows={5} cols={60} placeholder="What's on your mind?"
+                    name="text" rows={5} placeholder="What's on your mind?"
                     onBlur={validator}
                     onChange={onChange} ></textarea>
                 {error.empty && <p className={styles.error}>Post can't be empty!</p>}
@@ -99,10 +99,10 @@ export const PostForm = ({ action, editPostToggle, post }) => {
                     </div>
 
                     <div className={styles.buttons}>
-                        <input type="submit"
+                        <input type="submit" disabled={!formValid}
                             className={`${styles.post} ${action === "editPost" && isRemovingImage && input === '' ? "primary-danger" : "primary-color-blue"}`}
                             value={action === "addPost" ? "Post" : isRemovingImage && input === '' ? "Delete" : "Edit"} />
-                        <button type="button" disabled={formValid}
+                        <button type="button"
                             onClick={() => action === "addPost" ? addPostToggle() : editPostToggle()}
                             className={`${styles.cancel} ${action === "editPost" && isRemovingImage ? "color-blue" : "danger"}`}>Cancel</button>
                     </div>

@@ -9,7 +9,7 @@ import styles from './PostsList.module.css'
 export const PostsList = ({ posts, setPosts, setMaxCount, isMe }) => {
     const [addPostDiv, setAddPostDiv] = useState(false);
     const navigate = useNavigate();
-    
+
     const addPostToggle = () => {
         setAddPostDiv(!addPostDiv)
     }
@@ -38,7 +38,7 @@ export const PostsList = ({ posts, setPosts, setMaxCount, isMe }) => {
         e.preventDefault();
 
         const { text } = Object.fromEntries(new FormData(e.target));
-        
+
         if (isRemovingImage) {
             if (text.length > 0) {
                 setPosts(state => {
@@ -57,14 +57,13 @@ export const PostsList = ({ posts, setPosts, setMaxCount, isMe }) => {
 
         updatePost(_id, text)
             .then(() => {
-                setPosts(state => {
-                    return state.map(x => {
+                setPosts(state =>
+                    state.map(x => {
                         if (x._id === _id) {
                             x.text = text;
                         }
                         return x;
-                    })
-                })
+                    }))
             })
             .catch(() => {
                 navigate('/not-found');

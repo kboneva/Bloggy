@@ -1,0 +1,19 @@
+.btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.text {
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+.likes {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { PostContext } from "../../../../contexts/PostContext";
 import { auth } from "../../../../firebase";
 import { getUserById } from "../../../../services/userService";
-import { Like } from "../../Like";
+import { Like } from "../../Like/Like";
 import styles from './Post.module.css'
 import { PostForm } from "../PostForm/PostForm";
 
@@ -58,7 +58,7 @@ export const Post = ({ post }) => {
                     <div>
                         <hr />
                         <div className={`${styles.buttons} flex`}>
-                            <Like postId={post._id} />
+                            <Like postId={post._id} detailed={false} left={false} />
                             <div className="flex">
                                 {currentId === post.userId && !deleteDiv && <button className={`${styles.btn} danger`} onClick={() => deleteConfirmation()}><i className={`${styles.icon} fas fa-times`}></i></button>}
                                 {deleteDiv && <span className={styles.deleteText}>Are you sure you want to delete?

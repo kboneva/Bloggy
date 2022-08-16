@@ -2,7 +2,7 @@ import { get, ref, remove, update } from "firebase/database"
 import { db } from "../firebase"
 
 export const getFollowers = async (currentId, userId) => {
-    const snapshot = await get(ref(db, `follows/to/${userId}`))
+    const snapshot = await get(ref(db, `follows/${userId}`))
     if (snapshot.exists()) {
         const list = Object.entries(snapshot.val()).map(([id, follow]) => {
             return {
@@ -21,15 +21,9 @@ export const getFollowers = async (currentId, userId) => {
 }
 
 export const follow = async (currentId, id) => {
-    await Promise.all([
-        update(ref(db, `follows/to/${id}`), {[currentId]: true}),
-        update(ref(db, `follows/from/${currentId}`), {[id]: true})
-    ]);
+    await update(ref(db, `follows/${id}`), {[currentId]: true});
 }
 
 export const unfollow = async (currentId, id) => {
-    await Promise.all([
-        remove(ref(db, `follows/to/${id}/${currentId}`)),
-        remove(ref(db, `follows/from/${currentId}/${id}`))
-    ])
+    await remove(ref(db, `follows/${id}/${currentId}`))
 }

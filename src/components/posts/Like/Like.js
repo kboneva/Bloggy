@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { auth } from "../../firebase";
-import { dislike, getLikes, like } from "../../services/likeService";
+import { auth } from "../../../firebase";
+import { dislike, getLikes, like } from "../../../services/likeService";
 import styles from './Like.module.css';
 
-export const Like = ({postId}) => {
+export const Like = ({postId, detailed, left}) => {
     const currentId = !!auth.currentUser ? auth.currentUser.uid : '';
     const [likes, setLikes] = useState({
         status: false,
@@ -40,12 +40,13 @@ export const Like = ({postId}) => {
     }
 
     return (
-        !!likes.list && <div>
+        !!likes.list && <div className={styles.likes}>
+            { left && <span className={styles.text}>{likes.list.length || "0"}{detailed ? " Likes" : ""}</span>}
             {!likes.status
                 ? <button className={`${styles.btn} color-blue`} onClick={likeHandler}><i className="far fa-heart"></i></button>
                 : <button className={`${styles.btn} danger`} onClick={dislikeHandler}><i className="fas fa-heart"></i></button>
             }
-            <span>{likes.list.length || "0"} Likes</span>
+            { !left && <span className={styles.text}>{likes.list.length || "0"}{detailed ? " Likes" : ""}</span>}
         </div>
     );
 }
