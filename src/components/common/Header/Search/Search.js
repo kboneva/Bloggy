@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { searchUsers } from "../../../../services/userService";
 import styles from './Search.module.css'
 
-export const Search = () => {
+export const Search = ({setSearchNav}) => {
     const [input, setInput] = useState('')
     const [searchResult, setSearchResult] = useState([]);
-    const navigate = useNavigate();
 
     const onChangeHandler = (e) => {
         setInput(e.target.value);
@@ -25,6 +24,7 @@ export const Search = () => {
         setTimeout(() => {
             setInput('');
             setSearchResult([]);
+            setSearchNav(false);
         }, 100);
     }
 
@@ -33,7 +33,7 @@ export const Search = () => {
             <input className={styles.searchBar}
                 type="text" id="search" name="search" placeholder="Search users"
                 value={input} onChange={onChangeHandler}
-                onBlur={resetInput} />
+                onBlur={resetInput}/>
             <button className={`${styles.searchBtn} search`} value="Search"><i className="fa fa-search"></i></button>
 
             {searchResult.length > 0 && <div className={`${styles.searchResult} searchRes`}>

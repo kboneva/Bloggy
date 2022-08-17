@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ResponsiveContext } from "../../../contexts/ResponsiveContext";
 import { auth } from "../../../firebase";
 import { getAllPosts, getPostsFromFollowing, loadMorePostsAll, loadMorePostsFollowing } from "../../../services/postService";
 import { allPostPreference, updatePostPreference } from "../../../services/userService";
@@ -7,6 +8,7 @@ import { PostsList } from "../../posts/PostsList/PostsList";
 import styles from './Catalog.module.css'
 
 export const Catalog = () => {
+    const { isMobile } = useContext(ResponsiveContext);
     const [posts, setPosts] = useState([]);
     const [maxCount, setMaxCount] = useState(0);
     const [displayFollowing, setDisplayFollowing] = useState(false);
@@ -33,7 +35,6 @@ export const Catalog = () => {
                             setPosts(data.list);
                             setMaxCount(data.maxCount);
                         })
-
                 }
             })
         window.addEventListener('scroll', handleScroll);
@@ -122,15 +123,16 @@ export const Catalog = () => {
     return (
         <div className={styles.box}>
             <h1 className={styles.title}>Home</h1>
-            {!!currentId && <button className={`${styles.btn} color-blue`} onClick={() => postsToggle()}>Show {displayFollowing ? "all posts" : "posts from people you follow"}</button>}
+            {!!currentId ? <button className={`${styles.btn} color-blue`} onClick={() => postsToggle()}>{!isMobile && "Show "}{displayFollowing
+                ? (isMobile ? <i className={`${styles.icon} fas fa-user-friends`}></i> : "all posts")
+                : (isMobile ? <i className={`${styles.icon} fas fa-user-check`}></i> : "posts from people you follow")}</button>
+            : <div><br /><br /></div>}
             <PostsList posts={posts} setPosts={setPosts} setMaxCount={setMaxCount} isMe={auth.currentUser} />
             {isLoading && <div>...</div>}
-            {currentId === '' && <div className={styles.background}>
-                <div className={styles.signup}>
-                    <h2>You need to sign in to continue!</h2>
-                    <button onClick={() => navigate('/register')} className={`${styles.signBtn} primary-color-blue`} >Sign up</button>
-                    <button onClick={() => navigate('/login')} className={`${styles.signBtn} `}>Sign in</button>
-                </div>
+            {currentId === '' && <div className={styles.signup}>
+                <h2>You need to sign in to continue!</h2>
+                <button onClick={() => navigate('/register')} className={`${styles.signBtn} primary-color-blue`} >Sign up</button>
+                <button onClick={() => navigate('/login')} className={`${styles.signBtn} `}>Sign in</button>
             </div>}
         </div>
     );

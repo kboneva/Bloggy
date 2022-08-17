@@ -55,3 +55,16 @@
     border: 1px solid var(--light-darkest);
     border-radius: 20px;
 }
+
+@media screen and (max-width: 730px) {
+    .container {
+        max-width: 500px;
+        width: 95%;
+        padding: 2rem 0;
+    }
+
+    .input {
+        max-width: 250px;
+        width: 100%;
+    }
+}

@@ -1,9 +1,11 @@
 import { useContext, useState } from "react";
 import { PostContext } from "../../../../contexts/PostContext";
 import { removeImageFromPost } from "../../../../services/postService";
+import { ResponsiveContext } from "../../../../contexts/ResponsiveContext";
 import styles from './PostForm.module.css'
 
 export const PostForm = ({ action, editPostToggle, post }) => {
+    const { isMobile } = useContext(ResponsiveContext);
     const { addPostHandler, addPostToggle, editPostHandler } = useContext(PostContext);
     const [input, setInput] = useState(action === "addPost" ? '' : post.text);
     const [image, setImage] = useState(null);
@@ -43,12 +45,17 @@ export const PostForm = ({ action, editPostToggle, post }) => {
         }
         else {
             setImage(imageSelected);
+            setError(false, false, false);
+            setFormValid(input.length <= 400);
         }
     }
 
     const onChange = (e) => {
         setInput(e.target.value);
-        setFormValid((e.target.value.length > 0) && (e.target.value.length <= 400));
+        setError(false, false, false);
+        setFormValid(((action === "addPost" && (e.target.value.length > 0 || !!image))
+            || (action === "editPost" && (e.target.value.length > 0 || !post.image)))
+            && (e.target.value.length <= 400));
     }
 
     const validator = (e) => {
@@ -95,7 +102,7 @@ export const PostForm = ({ action, editPostToggle, post }) => {
                                 <button className={`${styles.removeImage} danger`} onClick={() => editImageOut()}><i className={`${styles.icon} fas fa-times`}></i></button>
                                 <img className={styles.image} src={post.image} alt=""></img>
                             </div>}
-                        {action === "editPost" && isRemovingImage && input === '' && <p className="primary-danger-text">Empty posts with no text or image will be deleted!</p> }
+                        {action === "editPost" && isRemovingImage && input === '' && <p className="primary-danger-text">Empty posts with no text or image will be deleted!</p>}
                     </div>
 
                     <div className={styles.buttons}>
@@ -104,7 +111,7 @@ export const PostForm = ({ action, editPostToggle, post }) => {
                             value={action === "addPost" ? "Post" : isRemovingImage && input === '' ? "Delete" : "Edit"} />
                         <button type="button"
                             onClick={() => action === "addPost" ? addPostToggle() : editPostToggle()}
-                            className={`${styles.cancel} ${action === "editPost" && isRemovingImage ? "color-blue" : "danger"}`}>Cancel</button>
+                            className={`${styles.cancel} ${action === "editPost" && isRemovingImage ? "color-blue" : "danger"}`}>{isMobile ? <i className={`${styles.cancelIcon} fas fa-times`}></i> : "Cancel"}</button>
                     </div>
                 </div>
             </div>

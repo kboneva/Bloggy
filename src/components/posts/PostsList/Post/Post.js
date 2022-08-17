@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PostContext } from "../../../../contexts/PostContext";
 import { auth } from "../../../../firebase";
 import { getUserById } from "../../../../services/userService";
@@ -13,6 +13,7 @@ export const Post = ({ post }) => {
     const [editPostDiv, setEditPostDiv] = useState(false);
     const [deleteDiv, setDeleteDiv] = useState(false);
     const { deleteHandler } = useContext(PostContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         getUserById(post.userId)
@@ -58,12 +59,17 @@ export const Post = ({ post }) => {
                     <div>
                         <hr />
                         <div className={`${styles.buttons} flex`}>
-                            <Like postId={post._id} detailed={false} left={false} />
+                            <div className="flex">
+                                <span className="flex"><button className={`${styles.btn} color-blue`} onClick={() => navigate(`/post/${post._id}`)}><i className="fas fa-comment"></i></button>{!!post.comments ? Object.keys(post.comments).length : "0"}</span>
+                                <Like postId={post._id} detailed={false} left={false} />
+                            </div>
                             <div className="flex">
                                 {currentId === post.userId && !deleteDiv && <button className={`${styles.btn} danger`} onClick={() => deleteConfirmation()}><i className={`${styles.icon} fas fa-times`}></i></button>}
                                 {deleteDiv && <span className={styles.deleteText}>Are you sure you want to delete?
-                                    <button className={`${styles.btn} danger`} onClick={() => deleteHandler(post._id, post.image || null)}><i className={`${styles.icon} fas fa-check`}></i></button>
-                                    <button className={`${styles.btn} color-blue`} onClick={() => deleteConfirmation()}><i className={`${styles.icon} fas fa-times`}></i></button>
+                                    <div>
+                                        <button className={`${styles.btn} danger`} onClick={() => deleteHandler(post._id, post.image || null)}><i className={`${styles.icon} fas fa-check`}></i></button>
+                                        <button className={`${styles.btn} color-blue`} onClick={() => deleteConfirmation()}><i className={`${styles.icon} fas fa-times`}></i></button>
+                                    </div>
                                 </span>}
                                 {currentId === post.userId && <button className={`${styles.btn} color-blue`} onClick={() => editPostToggle()}><i className={`${styles.icon} fas fa-edit`}></i></button>}
                             </div>
@@ -71,14 +77,14 @@ export const Post = ({ post }) => {
                     </div>
                 </div>
                 : <div className={`${styles.margin} border flexStart`}>
-                <img src={user.avatar} className={styles.avatar} alt="" />
+                    <img src={user.avatar} className={styles.avatar} alt="" />
 
-                <div className={styles.textBox}>
-                    <span className={styles.username}>{user.username}</span>
-                    <div className={styles.text}>{post.text}</div>
-                    {!!post.image && <img src={post.image} className={styles.image} alt=""></img>}
-                </div>
-            </div>}
+                    <div className={styles.textBox}>
+                        <span className={styles.username}>{user.username}</span>
+                        <div className={styles.text}>{post.text}</div>
+                        {!!post.image && <img src={post.image} className={styles.image} alt=""></img>}
+                    </div>
+                </div>}
             {editPostDiv && <PostForm action="editPost" editPostToggle={editPostToggle} post={post} />}
         </div>
     );

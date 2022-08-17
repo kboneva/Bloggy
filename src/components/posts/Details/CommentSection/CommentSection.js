@@ -71,7 +71,7 @@ export const CommentSection = ({ postId, commentsFromPost }) => {
 
     return (
         <div>
-            <h1>Comments</h1>
+            <h1 className={styles.title}>Comments <small>- {comments.length}</small></h1>
             <form onSubmit={addCommentHandler}>
                 <div className={`border ${styles.margin}`}>
                     <textarea id="text" className={styles.text}

@@ -104,7 +104,7 @@ export const AvatarForm = () => {
                         {errors.someThingWentWrong && <p className={styles.error}>Something went wrong.</p>}
                     </div>
 
-                    <div>
+                    <div className={styles.buttons}>
                         <button type='submit' className={`${styles.btn} color-blue`}><i className={`${styles.icon} fas fa-check`}></i></button>
                         <button className={`${styles.btn} danger`} onClick={() => formToggle()}><i className={`${styles.icon} fas fa-times`}></i></button>
                     </div>

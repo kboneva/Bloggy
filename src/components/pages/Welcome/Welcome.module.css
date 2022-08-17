@@ -2,7 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
 }
 
 
@@ -40,3 +41,14 @@
     cursor: pointer;
 }
 
+@media screen and (max-width: 730px) {
+    .signBox {
+        max-width: 400px;
+        width: 95%;
+    }
+
+    .text {
+        max-width: 500px;
+        width: 95%;
+    }
+}

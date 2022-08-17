@@ -3,11 +3,16 @@
     font-size: 20px;
     padding: 0.3rem 0.5rem;
     border-radius: 5px;
-    width: 250px;
+    width: 300px;
 }
 
 .text {
     font-size: 20px;
+}
+
+.buttons {
+    display: flex;
+    gap: 0.25rem;
 }
 
 .btn {
@@ -71,4 +76,17 @@
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+
+@media screen and (max-width: 730px) {
+    .input {
+        max-width: 225px;
+        width: 100%;
+    }
+    
+    .buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
 }

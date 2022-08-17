@@ -13,3 +13,10 @@
     margin: 0.5rem 0;
     font-size: 14px;
 }
+
+@media screen and (max-width: 730px) {
+    .row {
+        flex-direction: column;
+        gap: 0;
+    }
+}

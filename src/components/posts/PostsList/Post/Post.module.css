@@ -43,7 +43,7 @@
 }
 
 .deleteText {
-    color: rgb(206, 66, 66);
+    color: var(--primary-color-red);
     display: flex;
     align-items: center;
     gap: 0.25rem;
@@ -51,4 +51,16 @@
 
 .notLink {
     cursor: default;
+}
+
+
+@media screen and (max-width: 730px) {
+    .buttons {
+        margin: 0;
+    }
+
+    .deleteText {
+        display: flex;
+        flex-direction: column;
+    }
 }

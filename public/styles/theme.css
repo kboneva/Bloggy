@@ -32,11 +32,11 @@
     --transition: 0.2s;
 }
 
-.light-theme, .dark-theme, a, input, textarea, .dropdown-theme, .border, hr, button, .search, footer {
+.light-theme, .dark-theme, a, input, textarea, .dropdown-theme, .border, hr, button, .search, footer, .navBtn {
     transition: all var(--transition);
 }
 
-.light-theme, .light-theme a {
+.light-theme, .light-theme a, .light-theme .navBtn {
     background-color: var(--light);
     color: var(--dark);
 }
@@ -59,7 +59,7 @@
 }
 
 
-.dark-theme, .dark-theme a, .dark-theme .searchRes {
+.dark-theme, .dark-theme a, .dark-theme .searchRes, .dark-theme .navBtn {
     background-color: var(--dark);
     color: var(--light);
 }

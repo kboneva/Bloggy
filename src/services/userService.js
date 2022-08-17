@@ -1,5 +1,5 @@
-import { ref, get, query, set, orderByChild, equalTo, child, update } from "firebase/database"
-import { db, defaultAvatar } from "../firebase"
+import { ref, get, query, set, orderByChild, equalTo, child, update, onValue } from "firebase/database"
+import { auth, db, defaultAvatar } from "../firebase"
 
 const usersRef = ref(db, 'users');
 
@@ -80,6 +80,9 @@ export const isUsernameUnique = async (username) => {
 }
 
 export const allPostPreference = async (currentId) => {
+    if (currentId === '') {
+        return true;
+    }
     const snapshot = await get(ref(db, "users/" + currentId + "/allPostPreference"));
     return snapshot.exists() ? snapshot.val() : false;
 }

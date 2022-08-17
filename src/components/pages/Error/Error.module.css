@@ -2,9 +2,6 @@
     font-size: 36px;
 }
 
-.text {
-}
-
 .btn {
     margin-top: 2rem;
     text-align: center;
@@ -13,4 +10,22 @@
     border-radius: 50px;
     font-size: 20px;
     cursor: pointer;
+}
+
+@media screen and (max-width: 730px) {
+    .title {
+        text-align: center;
+    }
+
+    .text {
+        text-align: center;
+        max-width: 95%;
+    }
+
+    .box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
 }

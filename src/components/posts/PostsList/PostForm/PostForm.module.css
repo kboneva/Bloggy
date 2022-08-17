@@ -55,7 +55,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-left: 5rem;
 }
 
 .icon {
@@ -64,9 +63,9 @@
 }
 
 .addContainer {
+    margin-top: 1rem;
     position: relative;
     width: 60%;
-    margin-left: -5rem;
 }
 
 .preview {
@@ -76,6 +75,7 @@
 
 .editContainer {
     position: relative;
+    margin-top: 1rem;
     margin-left: 0.2rem;
     width: 70%;
 }
@@ -93,4 +93,8 @@
     border-radius: 50px;
     cursor: pointer;
     text-align: center;
+}
+
+.cancelIcon {
+    font-size: 20px;
 }

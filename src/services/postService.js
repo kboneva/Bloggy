@@ -94,7 +94,7 @@ export const loadMorePostsFollowing = async (currentId, lastLen) => {
 export const getPostsCount = async () => {
     const result = await fetch("https://webforum-7c715-default-rtdb.europe-west1.firebasedatabase.app/posts.json?shallow=true")
         .then(res => res.json());
-    return Object.keys(result).length;
+    return !!result ? Object.keys(result).length : 0;
 }
 
 
