@@ -3,6 +3,9 @@
 Bloggy - a social media web site in which users can post their thoughts and share images, in short "blogs". The site is inspired by Twitter's design.
 The client-side is a single page application built using ReactJS. The back-end uses Firebase for authentication, database, and storage. The project is deployed through Firebase Hosting.
 
+Link to demo deploy:
+https://webforum-7c715.web.app/
+
 
 # How it works
 
