@@ -10,3 +10,8 @@
     cursor: pointer;
     z-index: 1;
 }
+
+.noposts {
+    margin-top: -2px;
+    padding-top: 2rem;
+}

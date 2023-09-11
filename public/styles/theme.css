@@ -1,7 +1,7 @@
 :root {
-    --light: rgb(245, 245, 245);
-    --light-darker: rgb(225, 225, 230);
-    --light-darkest: rgb(205, 205, 215);
+    --light: rgb(255, 255, 255);
+    --light-darker: rgb(220, 225, 235);
+    --light-darkest: rgb(200, 205, 220);
     --dark: rgb(30, 35, 45);
     --dark-darker: rgb(20, 23, 30);
     --dark-lighter: rgb(45, 55, 70);

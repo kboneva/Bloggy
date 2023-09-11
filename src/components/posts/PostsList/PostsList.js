@@ -91,7 +91,9 @@ export const PostsList = ({ posts, setPosts, setMaxCount, isMe }) => {
                             <Post key={post._id} post={post} />
                         )}
                     </div>
-                    : ""
+                    : <div className={styles.noposts}>
+                        <h3>There's nothing here yet.</h3>
+                    </div>
                 }
             </div>
         </PostContext.Provider>

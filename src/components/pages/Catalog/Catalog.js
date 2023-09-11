@@ -125,7 +125,7 @@ export const Catalog = () => {
             <h1 className={styles.title}>Home</h1>
             {!!currentId ? <button className={`${styles.btn} color-blue`} onClick={() => postsToggle()}>{!isMobile && "Show "}{displayFollowing
                 ? (isMobile ? <i className={`${styles.icon} fas fa-user-friends`}></i> : "all posts")
-                : (isMobile ? <i className={`${styles.icon} fas fa-user-check`}></i> : "posts from people you follow")}</button>
+                : (isMobile ? <i className={`${styles.icon} fas fa-user-check`}></i> : "followed")}</button>
             : <div><br /><br /></div>}
             <PostsList posts={posts} setPosts={setPosts} setMaxCount={setMaxCount} isMe={auth.currentUser} />
             {isLoading && <div>...</div>}
