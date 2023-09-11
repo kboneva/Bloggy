@@ -46,7 +46,6 @@ function App() {
         auth.onAuthStateChanged(authUser => {
             if (authUser) {
                 onValue(ref(db, "/users/" + authUser.uid + "/username"), (snapshot) => {
-                    console.log(snapshot.val());
                     setUsername(snapshot.val());
                 })
                 isDarkTheme(authUser.uid)
