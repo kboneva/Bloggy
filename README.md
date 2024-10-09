@@ -1,27 +1,24 @@
-# Project Description
+# Bloggy
 
-Bloggy - a social media web site in which users can post their thoughts and share images, in short "blogs". The site is inspired by Twitter's design.
-The client-side is a single page application built using ReactJS. The back-end uses Firebase for authentication, database, and storage. The project is deployed through Firebase Hosting.
+Bloggy is a social media platform where users can post thoughts and share images, inspired by Twitter/X. The client-side is a single-page application built with ReactJS, while Firebase manages authentication, database, and storage. The project is deployed through Firebase Hosting.
 
-Link to demo deploy:
-https://webforum-7c715.web.app/
+**Live Demo:** https://webforum-7c715.web.app/
 
 
-# How it works
+## Key Features
 
-Guests are greeted by a welcome page, but can also take a look at a limited section of the catalog page, where they are asked to log in to see more.
-Signed in users are able to interact with all posts, leave likes and comments, as well as make their own posts which they can edit and delete. When making a post, you have an option to upload an image as well. Any user's profile can be visited, and you can follow others. Every user has private access to a settings page, where they can change their own username, email, password, and avatar, as well as change their theme to light/dark mode.
-In the catalog page you can choose to show posts from either everyone, or from those you follow. You can also find other users through a search bar.
+- **Guest Access:** Visitors can browse a preview of the catalog, with full access after logging in.
+- **User Interaction:** Signed-in users can like, comment, and create posts. They can also follow other users and view their profiles.
+- **Personalized Feed:** In the catalog, users can toggle between viewing posts from everyone or only from people they follow.
+- **Profile Management:** Users have access to a private settings page where they can update their username, email, password, and avatar, and switch between light/dark mode.
+- **Image Uploads:** Users can add images to their posts.
+- **Search Functionality:** Users can search for others using a search bar.
 
 
-## Technologies used and features
+## Technologies Used
 
-- ReactJS
-- Firebase Authentication
-- Firebase Realtime Database
-- Firebase Storage
-- Firebase Hosting
-- Responsive design
-- Data validation
-- Dark/light theme
-- Infinite scrolling
+- **Frontend:** ReactJS
+- **Backend:** Firebase (Authentication, Realtime Database, Storage)
+- **Deployment:** Firebase Hosting
+- **Design:** Responsive layout with dark/light theme
+- **Additional Features:** Data validation, infinite scrolling
